@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard Guide</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="guide-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h1 class="sidebar-title" data-en="Dashboard Guide" data-ar="دليل لوحة التحكم">Dashboard Guide</h1>
+                    <button id="languageToggle"
+                        style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; cursor: pointer; font-family: Figtree, sans-serif; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+                        EN | AR
+                    </button>
+                </div>
+                <p class="sidebar-subtitle" data-en="Everything you need to manage your restaurant"
+                    data-ar="كل ما تحتاجه لإدارة مطعمك">Everything you need to manage your restaurant</p>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchInput" placeholder="Search guide..."
+                    data-placeholder-en="Search guide..." data-placeholder-ar="ابحث في الدليل..." autocomplete="off">
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-section">
+                <div class="nav-category" data-en="Getting Started" data-ar="البدء">Getting Started</div>
+                <a class="nav-link" data-section="dashboard-overview" data-en="Dashboard Overview"
+                    data-ar="نظرة عامة على لوحة التحكم">Dashboard Overview</a>
+                <a class="nav-link" data-section="changing-language" data-en="Changing Language"
+                    data-ar="تغيير اللغة">Changing Language</a>
+
+                <div class="nav-category" data-en="Profile Management" data-ar="إدارة الملف الشخصي">Profile Management
+                </div>
+                <a class="nav-link" data-section="profile-username" data-en="Update Username"
+                    data-ar="تحديث اسم المستخدم">Update Username</a>
+                <a class="nav-link" data-section="profile-email" data-en="Update Email"
+                    data-ar="تحديث البريد الإلكتروني">Update Email</a>
+                <a class="nav-link" data-section="profile-password" data-en="Update Password"
+                    data-ar="تحديث كلمة المرور">Update Password</a>
+                <a class="nav-link" data-section="profile-delete" data-en="Delete Account" data-ar="حذف الحساب">Delete
+                    Account</a>
+
+                <div class="nav-category" data-en="Restaurant Setup" data-ar="إعداد المطعم">Restaurant Setup</div>
+                <a class="nav-link" data-section="settings-overview" data-en="Settings Overview"
+                    data-ar="نظرة عامة على الإعدادات">Settings Overview</a>
+                <a class="nav-link nav-sublink" data-section="settings-logo" data-en="Upload Logo"
+                    data-ar="تحميل الشعار">Upload Logo</a>
+                <a class="nav-link nav-sublink" data-section="settings-cover" data-en="Upload Cover Photo"
+                    data-ar="تحميل صورة الغلاف">Upload Cover Photo</a>
+                <a class="nav-link nav-sublink" data-section="settings-info" data-en="Restaurant Information"
+                    data-ar="معلومات المطعم">Restaurant Information</a>
+                <a class="nav-link nav-sublink" data-section="settings-colors" data-en="Brand Colors"
+                    data-ar="ألوان العلامة التجارية">Brand Colors</a>
+                <a class="nav-link nav-sublink" data-section="settings-qr" data-en="QR Code for Menu"
+                    data-ar="رمز QR للقائمة">QR Code for Menu</a>
+                <a class="nav-link nav-sublink" data-section="settings-social" data-en="Social Media Links"
+                    data-ar="روابط وسائل التواصل">Social Media Links</a>
+                <a class="nav-link nav-sublink" data-section="settings-other" data-en="Other Settings"
+                    data-ar="إعدادات أخرى">Other Settings</a>
+
+                <div class="nav-category" data-en="Menu Management" data-ar="إدارة القائمة">Menu Management</div>
+                <a class="nav-link" data-section="categories-overview" data-en="Categories Overview"
+                    data-ar="نظرة عامة على الفئات">Categories Overview</a>
+                <a class="nav-link nav-sublink" data-section="categories-add" data-en="Add Category"
+                    data-ar="إضافة فئة">Add Category</a>
+                <a class="nav-link nav-sublink" data-section="categories-excel" data-en="Import/Export Excel"
+                    data-ar="استيراد/تصدير Excel">Import/Export Excel</a>
+                <a class="nav-link nav-sublink" data-section="categories-search" data-en="Search Categories"
+                    data-ar="البحث في الفئات">Search Categories</a>
+
+                <a class="nav-link" data-section="products-overview" data-en="Products Overview"
+                    data-ar="نظرة عامة على المنتجات">Products Overview</a>
+                <a class="nav-link nav-sublink" data-section="products-add" data-en="Add Product"
+                    data-ar="إضافة منتج">Add Product</a>
+                <a class="nav-link nav-sublink" data-section="products-excel" data-en="Import/Export Excel"
+                    data-ar="استيراد/تصدير Excel">Import/Export Excel</a>
+                <a class="nav-link nav-sublink" data-section="products-filter" data-en="Filter Products"
+                    data-ar="تصفية المنتجات">Filter Products</a>
+                <a class="nav-link nav-sublink" data-section="products-pin" data-en="Pin Products"
+                    data-ar="تثبيت المنتجات">Pin Products</a>
+
+                <div class="nav-category" data-en="Team Management" data-ar="إدارة الفريق">Team Management</div>
+                <a class="nav-link" data-section="users-overview" data-en="Users Overview"
+                    data-ar="نظرة عامة على المستخدمين">Users Overview</a>
+                <a class="nav-link nav-sublink" data-section="users-add" data-en="Add New User"
+                    data-ar="إضافة مستخدم جديد">Add New User</a>
+                <a class="nav-link nav-sublink" data-section="users-edit" data-en="Edit User"
+                    data-ar="تعديل المستخدم">Edit User</a>
+
+                <div class="nav-category" data-en="Customer Experience" data-ar="تجربة العملاء">Customer Experience
+                </div>
+                <a class="nav-link" data-section="public-menu-overview" data-en="Public Menu Overview"
+                    data-ar="نظرة عامة على القائمة العامة">Public Menu Overview</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-search" data-en="Search & Browse"
+                    data-ar="البحث والتصفح">Search & Browse</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-cart" data-en="Add to Cart"
+                    data-ar="إضافة إلى السلة">Add to Cart</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-whatsapp" data-en="WhatsApp Orders"
+                    data-ar="طلبات واتساب">WhatsApp Orders</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-language" data-en="Language & Dark Mode"
+                    data-ar="اللغة والوضع الداكن">Language & Dark Mode</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-about" data-en="About Us Section"
+                    data-ar="قسم من نحن">About Us Section</a>
+
+                <div class="nav-category" data-en="Analytics & Billing" data-ar="التحليلات والفواتير">Analytics &
+                    Billing</div>
+                <a class="nav-link" data-section="reports" data-en="Reports & Analytics"
+                    data-ar="التقارير والتحليلات">Reports & Analytics</a>
+                <a class="nav-link" data-section="billing" data-en="Billing & Subscription"
+                    data-ar="الفواتير والاشتراك">Billing & Subscription</a>
+
+                <div class="nav-category" data-en="Help" data-ar="المساعدة">Help</div>
+                <a class="nav-link" data-section="faq" data-en="FAQ & Troubleshooting"
+                    data-ar="الأسئلة الشائعة واستكشاف الأخطاء">FAQ & Troubleshooting</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1 class="page-title">Welcome to Your Dashboard</h1>
+                <p class="page-description">
+                    This comprehensive guide will help you navigate and make the most of your restaurant dashboard.
+                    Use the sidebar to jump to specific sections, or use the search function to find exactly what you
+                    need.
+                </p>
+            </header>
+
+            <!-- Getting Started Section -->
+            <section id="getting-started" class="content-section">
+                <h2 class="section-header">Getting Started</h2>
+                <div id="dashboard-overview" class="subsection"></div>
+                <div id="changing-language" class="subsection"></div>
+            </section>
+
+            <!-- Profile Management Section -->
+            <section id="profile-management" class="content-section">
+                <h2 class="section-header">Profile Management</h2>
+                <div id="profile-username" class="subsection"></div>
+                <div id="profile-email" class="subsection"></div>
+                <div id="profile-password" class="subsection"></div>
+                <div id="profile-delete" class="subsection"></div>
+            </section>
+
+            <!-- Restaurant Setup Section -->
+            <section id="restaurant-setup" class="content-section">
+                <h2 class="section-header">Restaurant Setup</h2>
+                <div id="settings-overview" class="subsection"></div>
+                <div id="settings-logo" class="subsection"></div>
+                <div id="settings-cover" class="subsection"></div>
+                <div id="settings-info" class="subsection"></div>
+                <div id="settings-colors" class="subsection"></div>
+                <div id="settings-qr" class="subsection"></div>
+                <div id="settings-social" class="subsection"></div>
+                <div id="settings-other" class="subsection"></div>
+            </section>
+
+            <!-- Menu Management - Categories Section -->
+            <section id="menu-categories" class="content-section">
+                <h2 class="section-header">Menu Management - Categories</h2>
+                <div id="categories-overview" class="subsection"></div>
+                <div id="categories-add" class="subsection"></div>
+                <div id="categories-excel" class="subsection"></div>
+                <div id="categories-search" class="subsection"></div>
+            </section>
+
+            <!-- Menu Management - Products Section -->
+            <section id="menu-products" class="content-section">
+                <h2 class="section-header">Menu Management - Products</h2>
+                <div id="products-overview" class="subsection"></div>
+                <div id="products-add" class="subsection"></div>
+                <div id="products-excel" class="subsection"></div>
+                <div id="products-filter" class="subsection"></div>
+                <div id="products-pin" class="subsection"></div>
+            </section>
+
+            <!-- Team Management Section -->
+            <section id="team-management" class="content-section">
+                <h2 class="section-header">Team Management</h2>
+                <div id="users-overview" class="subsection"></div>
+                <div id="users-add" class="subsection"></div>
+                <div id="users-edit" class="subsection"></div>
+            </section>
+
+            <!-- Public Menu Section -->
+            <section id="public-menu" class="content-section">
+                <h2 class="section-header">Customer Experience - Public Menu</h2>
+                <div id="public-menu-overview" class="subsection"></div>
+                <div id="public-menu-search" class="subsection"></div>
+                <div id="public-menu-cart" class="subsection"></div>
+                <div id="public-menu-whatsapp" class="subsection"></div>
+                <div id="public-menu-language" class="subsection"></div>
+                <div id="public-menu-about" class="subsection"></div>
+            </section>
+
+            <!-- Analytics & Billing Section -->
+            <section id="analytics-billing" class="content-section">
+                <h2 class="section-header">Analytics & Billing</h2>
+                <div id="reports" class="subsection"></div>
+                <div id="billing" class="subsection"></div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq-section" class="content-section">
+                <h2 class="section-header">FAQ & Troubleshooting</h2>
+                <!-- Content loaded dynamically by lazy.js -->
+                <div id="faq" class="subsection"></div>
+            </section>
+
+        </main>
+
+        <!-- Scroll to Top Button -->
+        <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+            ↑
+        </button>
+    </div>
+
+    <!-- JavaScript modules loaded in dependency order -->
+    <script src="js/translations.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/lazy.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

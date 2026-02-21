@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard Guide</title>
+    <style>
+        /* =========================================
+           Font Faces
+           ========================================= */
+        /* latin */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 400;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-400-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-400-normal.woff) format('woff');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 400;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-400-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-400-normal.woff) format('woff');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 500;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-500-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-500-normal.woff) format('woff');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 500;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-500-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-500-normal.woff) format('woff');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-600-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-600-normal.woff) format('woff');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Figtree';
+            font-style: normal;
+            font-weight: 600;
+            font-stretch: 100%;
+            font-display: swap;
+            src: url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-600-normal.woff2) format('woff2'), url(https://fonts.bunny.net/figtree/files/figtree-latin-ext-600-normal.woff) format('woff');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* =========================================
+           Base Resets & Defaults
+           ========================================= */
+        *,
+        :before,
+        :after {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb;
+        }
+
+        html,
+        :host {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit;
+            background-color: #FDFDFC;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit;
+            margin: 0;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        /* =========================================
+           Layout Utilities
+           ========================================= */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-64 {
+            width: 16rem;
+        }
+
+        .sticky {
+            position: sticky;
+        }
+
+        .fixed {
+            position: fixed;
+        }
+
+        .top-0 {
+            top: 0;
+        }
+
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* =========================================
+           Spacing
+           ========================================= */
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        /* =========================================
+           Borders & Backgrounds
+           ========================================= */
+        .border-b {
+            border-bottom-width: 1px;
+        }
+
+        .border-r {
+            border-right-width: 1px;
+        }
+
+        .border-gray-200 {
+            border-color: rgb(229 231 235);
+        }
+
+        .bg-white {
+            background-color: #fff;
+        }
+
+        .bg-gray-50 {
+            background-color: rgb(249 250 251);
+        }
+
+        .bg-gray-100 {
+            background-color: rgb(243 244 246);
+        }
+
+        /* =========================================
+           Custom Styles for Guide Page
+           ========================================= */
+        .guide-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: #fff;
+            border-right: 1px solid #e5e7eb;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(135deg, #FCD34D 0%, #EF4444 100%);
+        }
+
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Search Box */
+        .search-container {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-family: Figtree, sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #FCD34D;
+            box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.1);
+        }
+
+        /* Navigation Links */
+        .nav-section {
+            padding: 0.5rem 0;
+        }
+
+        .nav-category {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            color: #374151;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(252, 211, 77, 0.1);
+            color: #1f2937;
+        }
+
+        .nav-link.active {
+            background-color: rgba(252, 211, 77, 0.15);
+            border-left-color: #FCD34D;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        .nav-sublink {
+            padding-left: 2.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1200px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            line-height: 1.75;
+        }
+
+        /* Section Styles */
+        .content-section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: inline-block;
+            background: linear-gradient(135deg, #FCD34D 0%, #EF4444 100%);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .subsection {
+            margin-bottom: 2.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .subsection-description {
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #f3f4f6;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(252, 211, 77, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%);
+        }
+
+        .video-placeholder-content {
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .video-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        .video-placeholder-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background-color: rgba(252, 211, 77, 0.1);
+            border-left: 4px solid #FCD34D;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box-text {
+            color: #78350f;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+            color: #FCD34D;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.25rem;
+            color: #4b5563;
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-results-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results-text {
+            font-size: 0.9375rem;
+        }
+
+        /* List Styles */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0 0.5rem 1.75rem;
+            position: relative;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .feature-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #FCD34D;
+            font-weight: 600;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #FCD34D 0%, #EF4444 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            z-index: 50;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-to-top.show {
+            display: flex;
+        }
+
+        /* =========================================
+           RTL Support for Arabic
+           ========================================= */
+        body.rtl {
+            direction: rtl;
+        }
+
+        body.rtl .sidebar {
+            border-right: none;
+            border-left: 1px solid #e5e7eb;
+            left: auto;
+            right: 0;
+        }
+
+        body.rtl .main-content {
+            margin-left: 0;
+            margin-right: 280px;
+        }
+
+        body.rtl .nav-link {
+            border-left: none;
+            border-right: 3px solid transparent;
+        }
+
+        body.rtl .nav-link.active {
+            border-left: none;
+            border-right-color: #FCD34D;
+        }
+
+        body.rtl .nav-sublink {
+            padding-left: 1.5rem;
+            padding-right: 2.5rem;
+        }
+
+        body.rtl .feature-list li {
+            padding-left: 0;
+            padding-right: 1.75rem;
+        }
+
+        body.rtl .feature-list li:before {
+            left: auto;
+            right: 0;
+            content: "←";
+        }
+
+        body.rtl .info-box {
+            border-left: none;
+            border-right: 4px solid #FCD34D;
+        }
+
+        body.rtl .scroll-to-top {
+            right: auto;
+            left: 2rem;
+        }
+
+        body.rtl .faq-question {
+            flex-direction: row-reverse;
+        }
+
+        /* Highlight search results */
+        .highlight {
+            background-color: #FCD34D;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Responsive adjustments for very small screens */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            body.rtl .main-content {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="guide-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <h1 class="sidebar-title" data-en="Dashboard Guide" data-ar="دليل لوحة التحكم">Dashboard Guide</h1>
+                    <button id="languageToggle"
+                        style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; cursor: pointer; font-family: Figtree, sans-serif; font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+                        EN | AR
+                    </button>
+                </div>
+                <p class="sidebar-subtitle" data-en="Everything you need to manage your restaurant"
+                    data-ar="كل ما تحتاجه لإدارة مطعمك">Everything you need to manage your restaurant</p>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchInput" placeholder="Search guide..."
+                    data-placeholder-en="Search guide..." data-placeholder-ar="ابحث في الدليل..." autocomplete="off">
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-section">
+                <div class="nav-category" data-en="Getting Started" data-ar="البدء">Getting Started</div>
+                <a class="nav-link" data-section="dashboard-overview" data-en="Dashboard Overview"
+                    data-ar="نظرة عامة على لوحة التحكم">Dashboard Overview</a>
+                <a class="nav-link" data-section="changing-language" data-en="Changing Language"
+                    data-ar="تغيير اللغة">Changing Language</a>
+
+                <div class="nav-category" data-en="Profile Management" data-ar="إدارة الملف الشخصي">Profile Management
+                </div>
+                <a class="nav-link" data-section="profile-username" data-en="Update Username"
+                    data-ar="تحديث اسم المستخدم">Update Username</a>
+                <a class="nav-link" data-section="profile-email" data-en="Update Email"
+                    data-ar="تحديث البريد الإلكتروني">Update Email</a>
+                <a class="nav-link" data-section="profile-password" data-en="Update Password"
+                    data-ar="تحديث كلمة المرور">Update Password</a>
+                <a class="nav-link" data-section="profile-delete" data-en="Delete Account" data-ar="حذف الحساب">Delete
+                    Account</a>
+
+                <div class="nav-category" data-en="Restaurant Setup" data-ar="إعداد المطعم">Restaurant Setup</div>
+                <a class="nav-link" data-section="settings-overview" data-en="Settings Overview"
+                    data-ar="نظرة عامة على الإعدادات">Settings Overview</a>
+                <a class="nav-link nav-sublink" data-section="settings-logo" data-en="Upload Logo"
+                    data-ar="تحميل الشعار">Upload Logo</a>
+                <a class="nav-link nav-sublink" data-section="settings-cover" data-en="Upload Cover Photo"
+                    data-ar="تحميل صورة الغلاف">Upload Cover Photo</a>
+                <a class="nav-link nav-sublink" data-section="settings-info" data-en="Restaurant Information"
+                    data-ar="معلومات المطعم">Restaurant Information</a>
+                <a class="nav-link nav-sublink" data-section="settings-colors" data-en="Brand Colors"
+                    data-ar="ألوان العلامة التجارية">Brand Colors</a>
+                <a class="nav-link nav-sublink" data-section="settings-qr" data-en="QR Code for Menu"
+                    data-ar="رمز QR للقائمة">QR Code for Menu</a>
+                <a class="nav-link nav-sublink" data-section="settings-social" data-en="Social Media Links"
+                    data-ar="روابط وسائل التواصل">Social Media Links</a>
+                <a class="nav-link nav-sublink" data-section="settings-other" data-en="Other Settings"
+                    data-ar="إعدادات أخرى">Other Settings</a>
+
+                <div class="nav-category" data-en="Menu Management" data-ar="إدارة القائمة">Menu Management</div>
+                <a class="nav-link" data-section="categories-overview" data-en="Categories Overview"
+                    data-ar="نظرة عامة على الفئات">Categories Overview</a>
+                <a class="nav-link nav-sublink" data-section="categories-add" data-en="Add Category"
+                    data-ar="إضافة فئة">Add Category</a>
+                <a class="nav-link nav-sublink" data-section="categories-excel" data-en="Import/Export Excel"
+                    data-ar="استيراد/تصدير Excel">Import/Export Excel</a>
+                <a class="nav-link nav-sublink" data-section="categories-search" data-en="Search Categories"
+                    data-ar="البحث في الفئات">Search Categories</a>
+
+                <a class="nav-link" data-section="products-overview" data-en="Products Overview"
+                    data-ar="نظرة عامة على المنتجات">Products Overview</a>
+                <a class="nav-link nav-sublink" data-section="products-add" data-en="Add Product"
+                    data-ar="إضافة منتج">Add Product</a>
+                <a class="nav-link nav-sublink" data-section="products-excel" data-en="Import/Export Excel"
+                    data-ar="استيراد/تصدير Excel">Import/Export Excel</a>
+                <a class="nav-link nav-sublink" data-section="products-filter" data-en="Filter Products"
+                    data-ar="تصفية المنتجات">Filter Products</a>
+                <a class="nav-link nav-sublink" data-section="products-pin" data-en="Pin Products"
+                    data-ar="تثبيت المنتجات">Pin Products</a>
+
+                <div class="nav-category" data-en="Team Management" data-ar="إدارة الفريق">Team Management</div>
+                <a class="nav-link" data-section="users-overview" data-en="Users Overview"
+                    data-ar="نظرة عامة على المستخدمين">Users Overview</a>
+                <a class="nav-link nav-sublink" data-section="users-add" data-en="Add New User"
+                    data-ar="إضافة مستخدم جديد">Add New User</a>
+                <a class="nav-link nav-sublink" data-section="users-edit" data-en="Edit User"
+                    data-ar="تعديل المستخدم">Edit User</a>
+
+                <div class="nav-category" data-en="Customer Experience" data-ar="تجربة العملاء">Customer Experience
+                </div>
+                <a class="nav-link" data-section="public-menu-overview" data-en="Public Menu Overview"
+                    data-ar="نظرة عامة على القائمة العامة">Public Menu Overview</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-search" data-en="Search & Browse"
+                    data-ar="البحث والتصفح">Search & Browse</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-cart" data-en="Add to Cart"
+                    data-ar="إضافة إلى السلة">Add to Cart</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-whatsapp" data-en="WhatsApp Orders"
+                    data-ar="طلبات واتساب">WhatsApp Orders</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-language" data-en="Language & Dark Mode"
+                    data-ar="اللغة والوضع الداكن">Language & Dark Mode</a>
+                <a class="nav-link nav-sublink" data-section="public-menu-about" data-en="About Us Section"
+                    data-ar="قسم من نحن">About Us Section</a>
+
+                <div class="nav-category" data-en="Analytics & Billing" data-ar="التحليلات والفواتير">Analytics &
+                    Billing</div>
+                <a class="nav-link" data-section="reports" data-en="Reports & Analytics"
+                    data-ar="التقارير والتحليلات">Reports & Analytics</a>
+                <a class="nav-link" data-section="billing" data-en="Billing & Subscription"
+                    data-ar="الفواتير والاشتراك">Billing & Subscription</a>
+
+                <div class="nav-category" data-en="Help" data-ar="المساعدة">Help</div>
+                <a class="nav-link" data-section="faq" data-en="FAQ & Troubleshooting"
+                    data-ar="الأسئلة الشائعة واستكشاف الأخطاء">FAQ & Troubleshooting</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1 class="page-title">Welcome to Your Dashboard</h1>
+                <p class="page-description">
+                    This comprehensive guide will help you navigate and make the most of your restaurant dashboard.
+                    Use the sidebar to jump to specific sections, or use the search function to find exactly what you
+                    need.
+                </p>
+            </header>
+
+            <!-- Getting Started Section -->
+            <section id="dashboard-overview" class="content-section">
+                <h2 class="section-header">Getting Started</h2>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Dashboard Overview</h3>
+                    <p class="subsection-description">
+                        Your dashboard is the central hub for managing your restaurant's online presence.
+                        From here, you can manage your menu, track orders, update settings, and much more.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Dashboard Overview Video</div>
+                            </div>
+                        </div>
+                        <!-- Replace with actual video embed:
+                        <iframe src="YOUR_VIDEO_URL" frameborder="0" allowfullscreen></iframe>
+                        -->
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 Quick Tip</div>
+                        <div class="info-box-text">
+                            Take a moment to familiarize yourself with the main navigation menu. Each section is
+                            designed
+                            to help you manage a specific aspect of your restaurant.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="changing-language" class="content-section">
+                <div class="subsection">
+                    <h3 class="subsection-title">Changing Language</h3>
+                    <p class="subsection-description">
+                        You can change the dashboard language to match your preference. The language selector is
+                        located in the top navigation bar.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Changing Language Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Management Section -->
+            <section id="profile-management" class="content-section">
+                <h2 class="section-header">Profile Management</h2>
+
+                <div id="profile-username" class="subsection">
+                    <h3 class="subsection-title">Update Username</h3>
+                    <p class="subsection-description">
+                        Keep your profile up to date by changing your username. This is the name that will be
+                        displayed throughout the dashboard.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Update Username Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="profile-email" class="subsection">
+                    <h3 class="subsection-title">Update Email</h3>
+                    <p class="subsection-description">
+                        Change the email address associated with your account. Make sure to use an email you
+                        have access to for account recovery and notifications.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Update Email Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="profile-password" class="subsection">
+                    <h3 class="subsection-title">Update Password</h3>
+                    <p class="subsection-description">
+                        Keep your account secure by regularly updating your password. Choose a strong password
+                        that combines letters, numbers, and special characters.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Update Password Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">🔒 Security Best Practices</div>
+                        <div class="info-box-text">
+                            Use a unique password for your dashboard, enable two-factor authentication if available,
+                            and never share your credentials with unauthorized users.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="profile-delete" class="subsection">
+                    <h3 class="subsection-title">Delete Account</h3>
+                    <p class="subsection-description">
+                        If you need to permanently delete your account, you can do so from the profile section.
+                        Please note that this action cannot be undone and will remove all your data.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Delete Account Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Restaurant Setup Section -->
+            <section id="restaurant-setup" class="content-section">
+                <h2 class="section-header">Restaurant Setup</h2>
+
+                <div id="settings-overview" class="subsection">
+                    <h3 class="subsection-title">Settings Overview</h3>
+                    <p class="subsection-description">
+                        The Settings section allows you to customize how your restaurant appears to customers.
+                        Here you can upload your branding, manage your information, and configure various options.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Settings Overview Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-logo" class="subsection">
+                    <h3 class="subsection-title">Upload Logo</h3>
+                    <p class="subsection-description">
+                        Your logo is one of the first things customers see. Upload a high-quality image that
+                        represents your brand. Recommended size: 500x500 pixels, PNG or JPG format.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Upload Logo Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-cover" class="subsection">
+                    <h3 class="subsection-title">Upload Cover Photo</h3>
+                    <p class="subsection-description">
+                        The cover photo appears at the top of your public menu. Choose an appetizing image that
+                        showcases your restaurant or signature dishes. Recommended size: 1920x600 pixels.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Upload Cover Photo Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-info" class="subsection">
+                    <h3 class="subsection-title">Restaurant Information</h3>
+                    <p class="subsection-description">
+                        Keep your restaurant details accurate and up-to-date. This includes your name, address,
+                        phone number, operating hours, and description.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Restaurant Information Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-colors" class="subsection">
+                    <h3 class="subsection-title">Brand Colors</h3>
+                    <p class="subsection-description">
+                        Customize the color scheme of your public menu to match your brand identity. Choose colors
+                        that are consistent with your restaurant's visual style.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Brand Colors Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-qr" class="subsection">
+                    <h3 class="subsection-title">QR Code for Menu</h3>
+                    <p class="subsection-description">
+                        Generate a QR code that customers can scan to instantly access your digital menu. Print
+                        it on table tents, flyers, or display it at your restaurant entrance.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">QR Code Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">📱 QR Code Tips</div>
+                        <div class="info-box-text">
+                            Download your QR code in high resolution for printing. Test it with multiple devices
+                            to ensure it works properly. Place it in visible locations where customers can easily scan
+                            it.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-social" class="subsection">
+                    <h3 class="subsection-title">Social Media Links</h3>
+                    <p class="subsection-description">
+                        Connect your social media profiles to your menu page. This makes it easy for customers to
+                        follow you and stay updated with your latest news and promotions.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Social Media Links Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-other" class="subsection">
+                    <h3 class="subsection-title">Other Settings</h3>
+                    <p class="subsection-description">
+                        Explore additional settings to fine-tune your dashboard experience and customize various
+                        features according to your needs.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Other Settings Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Management - Categories -->
+            <section id="menu-categories" class="content-section">
+                <h2 class="section-header">Menu Management - Categories</h2>
+
+                <div id="categories-overview" class="subsection">
+                    <h3 class="subsection-title">Categories Overview</h3>
+                    <p class="subsection-description">
+                        Categories help organize your menu items into logical groups (e.g., Appetizers, Main Courses,
+                        Desserts, Beverages). Well-organized categories make it easier for customers to browse your
+                        menu.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Categories Overview Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="categories-add" class="subsection">
+                    <h3 class="subsection-title">Add Category</h3>
+                    <p class="subsection-description">
+                        Create new categories to organize your menu items. Give each category a clear name and
+                        optionally add a description and image.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Add Category Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="categories-excel" class="subsection">
+                    <h3 class="subsection-title">Import/Export Excel</h3>
+                    <p class="subsection-description">
+                        Quickly add multiple categories at once by importing an Excel file, or export your existing
+                        categories to keep a backup or make bulk edits offline.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Import/Export Categories Excel Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">📊 Excel Import Tips</div>
+                        <div class="info-box-text">
+                            Download the template first to see the correct format. Make sure all required fields are
+                            filled in. Save your file as .xlsx or .csv before importing.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="categories-search" class="subsection">
+                    <h3 class="subsection-title">Search Categories</h3>
+                    <p class="subsection-description">
+                        Use the search bar to quickly find specific categories when you have many items in your list.
+                        This is especially useful as your menu grows.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Search Categories Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Management - Products -->
+            <section id="menu-products" class="content-section">
+                <h2 class="section-header">Menu Management - Products</h2>
+
+                <div id="products-overview" class="subsection">
+                    <h3 class="subsection-title">Products Overview</h3>
+                    <p class="subsection-description">
+                        Products are the individual menu items you offer. Each product includes details like name,
+                        price, description, image, and which category it belongs to.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Products Overview Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products-add" class="subsection">
+                    <h3 class="subsection-title">Add Product</h3>
+                    <p class="subsection-description">
+                        Add new menu items to your restaurant. Include an appetizing photo, accurate description,
+                        pricing, and assign it to the appropriate category.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Add Product Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">🍽️ Product Photo Tips</div>
+                        <div class="info-box-text">
+                            Use high-quality, well-lit photos. Show the dish as customers would receive it.
+                            Use a consistent style across all product photos for a professional look.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products-excel" class="subsection">
+                    <h3 class="subsection-title">Import/Export Excel</h3>
+                    <p class="subsection-description">
+                        Save time by importing multiple products at once using an Excel spreadsheet, or export
+                        your menu to make bulk updates offline.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Import/Export Products Excel Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products-filter" class="subsection">
+                    <h3 class="subsection-title">Filter Products</h3>
+                    <p class="subsection-description">
+                        Use filters to view specific groups of products based on category, availability, or other
+                        criteria. This helps you manage large menus more efficiently.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Filter Products Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products-pin" class="subsection">
+                    <h3 class="subsection-title">Pin Products</h3>
+                    <p class="subsection-description">
+                        Highlight your best-selling or featured items by pinning them. Pinned products appear
+                        prominently on your menu to attract customer attention.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Pin Products Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Management Section -->
+            <section id="team-management" class="content-section">
+                <h2 class="section-header">Team Management</h2>
+
+                <div id="users-overview" class="subsection">
+                    <h3 class="subsection-title">Users Overview</h3>
+                    <p class="subsection-description">
+                        Manage your restaurant staff members who have access to the dashboard. You can add multiple
+                        users and assign different permissions to control what each user can do.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Users Overview Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="users-add" class="subsection">
+                    <h3 class="subsection-title">Add New User</h3>
+                    <p class="subsection-description">
+                        Invite team members to access the dashboard. Each user will receive their own login
+                        credentials and can be assigned specific roles and permissions.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Add New User Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="users-edit" class="subsection">
+                    <h3 class="subsection-title">Edit User</h3>
+                    <p class="subsection-description">
+                        Update user information, change permissions, or remove users who no longer need access.
+                        Keep your team list current for better security.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Edit User Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">👥 Team Management Best Practices</div>
+                        <div class="info-box-text">
+                            Only give users the permissions they need. Regularly review your user list and remove
+                            former employees. Use unique accounts for each person rather than sharing credentials.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Public Menu Section -->
+            <section id="public-menu" class="content-section">
+                <h2 class="section-header">Customer Experience - Public Menu</h2>
+
+                <div id="public-menu-overview" class="subsection">
+                    <h3 class="subsection-title">Public Menu Overview</h3>
+                    <p class="subsection-description">
+                        The public menu is what your customers see when they visit your menu page or scan your QR code.
+                        It's designed to be user-friendly and mobile-optimized for the best ordering experience.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Public Menu Overview Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="public-menu-search" class="subsection">
+                    <h3 class="subsection-title">Search & Browse by Categories</h3>
+                    <p class="subsection-description">
+                        Customers can search for specific items or browse by category. The intuitive navigation
+                        makes it easy to find exactly what they're looking for.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Search & Browse Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="public-menu-cart" class="subsection">
+                    <h3 class="subsection-title">Add to Cart</h3>
+                    <p class="subsection-description">
+                        Customers can add multiple items to their cart, review their selections, and modify
+                        quantities before placing their order.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Add to Cart Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="public-menu-whatsapp" class="subsection">
+                    <h3 class="subsection-title">Complete Order via WhatsApp</h3>
+                    <p class="subsection-description">
+                        Orders are sent directly to your WhatsApp business number. This allows for quick,
+                        personal communication with customers to confirm orders and arrange delivery or pickup.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">WhatsApp Orders Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💬 WhatsApp Integration</div>
+                        <div class="info-box-text">
+                            Make sure your WhatsApp Business number is correctly configured in Settings.
+                            Respond promptly to orders to provide excellent customer service.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="public-menu-language" class="subsection">
+                    <h3 class="subsection-title">Language & Dark Mode</h3>
+                    <p class="subsection-description">
+                        Customers can switch between available languages and toggle dark mode for comfortable
+                        viewing in any lighting condition.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Language & Dark Mode Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="public-menu-about" class="subsection">
+                    <h3 class="subsection-title">About Us Section</h3>
+                    <p class="subsection-description">
+                        The About Us section displays your restaurant's story, contact information, and location.
+                        Keep this information current and engaging to build customer trust.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">About Us Section Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics & Billing Section -->
+            <section id="analytics-billing" class="content-section">
+                <h2 class="section-header">Analytics & Billing</h2>
+
+                <div id="reports" class="subsection">
+                    <h3 class="subsection-title">Reports & Analytics</h3>
+                    <p class="subsection-description">
+                        Track your restaurant's performance with detailed analytics. View order trends, popular
+                        items, peak hours, and other insights to help you make informed business decisions.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Reports & Analytics Video</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">📈 Using Analytics Effectively</div>
+                        <div class="info-box-text">
+                            Check your reports regularly to identify trends. Use this data to optimize your menu,
+                            adjust pricing, or plan promotions during slower periods.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="billing" class="subsection">
+                    <h3 class="subsection-title">Billing & Subscription</h3>
+                    <p class="subsection-description">
+                        Manage your subscription plan, view payment history, and update your billing information.
+                        Keep your subscription active to ensure uninterrupted service.
+                    </p>
+
+                    <div class="video-container">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-content">
+                                <div class="video-placeholder-icon">▶</div>
+                                <div class="video-placeholder-text">Billing & Subscription Video</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="content-section">
+                <h2 class="section-header">FAQ & Troubleshooting</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I reset my password?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            You can reset your password from the Profile section in your dashboard. Click on
+                            "Update Password" and follow the prompts. If you're locked out, use the "Forgot Password"
+                            link on the login page to receive a reset email.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Why aren't my menu changes showing on the public page?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Changes may take a few moments to appear. Try refreshing the page or clearing your browser
+                            cache. If issues persist, check that you've saved your changes in the dashboard and that
+                            the items are marked as "available" or "active".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I have multiple users managing the dashboard?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! You can add multiple team members from the Users section. Each user gets their own
+                            login credentials, and you can assign different permission levels to control what each
+                            user can access and modify.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I upload multiple products at once?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Use the Import Excel feature in the Products section. First, download the template to see
+                            the correct format. Fill in your product information, save the file, and then upload it.
+                            This is much faster than adding items one by one.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What image formats and sizes are recommended?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            For product images, use JPG or PNG format, ideally 800x800 pixels or larger. For your logo,
+                            500x500 pixels works well. The cover photo should be around 1920x600 pixels. Keep file sizes
+                            under 2MB for faster loading.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do customers place orders?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Customers browse your menu, add items to their cart, and then submit their order via
+                            WhatsApp.
+                            The order details are sent directly to your WhatsApp Business number, where you can confirm
+                            and coordinate delivery or pickup.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I temporarily hide items without deleting them?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! When editing a product, you can mark it as unavailable or inactive. This keeps it in
+                            your database but hides it from customers. You can easily make it visible again when needed.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I change my subscription plan?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Go to the Billing section in your dashboard. You'll see your current plan and options to
+                            upgrade or downgrade. Changes typically take effect at the start of your next billing cycle.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens if my subscription expires?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            If your subscription expires, your public menu will no longer be accessible to customers.
+                            Your data remains safe, and you can reactivate your account at any time by renewing your
+                            subscription in the Billing section.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I customize the look of my menu page?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! In the Settings section, you can upload your logo and cover photo, set brand colors,
+                            and customize various visual elements to match your restaurant's identity.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a limit to how many products I can add?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Limits depend on your subscription plan. Check your plan details in the Billing section.
+                            If you need to add more products, consider upgrading to a higher tier.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Who can I contact for additional support?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            If you need help beyond this guide, you can contact our support team through the contact
+                            information provided in your dashboard, or check for a support/help section within the
+                            platform for live chat or email support.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- No Results Message (hidden by default) -->
+            <div id="noResults" class="no-results hidden">
+                <div class="no-results-icon">🔍</div>
+                <h3 class="no-results-title">No Results Found</h3>
+                <p class="no-results-text">
+                    We couldn't find any content matching your search. Try different keywords or browse
+                    the sections using the navigation menu.
+                </p>
+            </div>
+        </main>
+
+        <!-- Scroll to Top Button -->
+        <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+            ↑
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ========================================
+            // 1. Configuration & State
+            // ========================================
+            const state = {
+                lang: localStorage.getItem('dashboardLang') || 'en',
+                isMobileMenuOpen: false
+            };
+
+            // ========================================
+            // 2. Translations (extend as needed)
+            // ========================================
+            const translations = {
+                pageTitle: {
+                    en: 'Welcome to Your Dashboard',
+                    ar: 'مرحباً بك في لوحة التحكم'
+                },
+                pageDescription: {
+                    en: 'This guide will help you navigate your dashboard.',
+                    ar: 'سيساعدك هذا الدليل في التنقل في لوحة التحكم.'
+                },
+                noResultsText: {
+                    icon: { en: '🔍', ar: '🔍' },
+                    title: { en: 'No Results Found', ar: 'لا توجد نتائج' },
+                    desc: {
+                        en: 'Try different keywords or browse the sections.',
+                        ar: 'جرب كلمات رئيسية مختلفة أو تصفح الأقسام.'
+                    }
+                }
+            };
+
+            // ========================================
+            // 3. DOM Elements
+            // ========================================
+            const elements = {
+                body: document.body,
+                navLinks: document.querySelectorAll('.nav-link'),
+                navCategories: document.querySelectorAll('.nav-category'),
+                sections: document.querySelectorAll('.content-section'),
+                subsections: document.querySelectorAll('.subsection'),
+                searchInput: document.getElementById('searchInput'),
+                noResults: document.getElementById('noResults'),
+                langBtn: document.getElementById('languageToggle'),
+                scrollToTopBtn: document.getElementById('scrollToTop'),
+                sidebar: document.querySelector('.sidebar')
+            };
+
+            // ========================================
+            // 4. Language & RTL
+            // ========================================
+            function switchLanguage(lang) {
+                state.lang = lang;
+                localStorage.setItem('dashboardLang', lang);
+
+                elements.body.classList.toggle('rtl', lang === 'ar');
+
+                // data-en / data-ar
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    if (el.tagName === 'INPUT') {
+                        el.placeholder = el.getAttribute(`data-placeholder-${lang}`) || '';
+                    } else {
+                        el.textContent = el.getAttribute(`data-${lang}`);
+                    }
+                });
+
+                // Headers
+                const title = document.querySelector('.page-title');
+                const desc = document.querySelector('.page-description');
+                if (title) title.textContent = translations.pageTitle[lang];
+                if (desc) desc.textContent = translations.pageDescription[lang];
+
+                // No results block
+                const icon = document.querySelector('.no-results-icon');
+                const t = document.querySelector('.no-results-title');
+                const d = document.querySelector('.no-results-text');
+                if (icon) icon.textContent = translations.noResultsText.icon[lang];
+                if (t) t.textContent = translations.noResultsText.title[lang];
+                if (d) d.textContent = translations.noResultsText.desc[lang];
+
+                // Mobile toggle RTL positioning
+                const mobileBtn = document.querySelector('.mobile-menu-toggle');
+                if (mobileBtn) {
+                    mobileBtn.style.left = lang === 'ar' ? 'auto' : '20px';
+                    mobileBtn.style.right = lang === 'ar' ? '20px' : 'auto';
+                }
+            }
+
+            elements.langBtn?.addEventListener('click', () => {
+                switchLanguage(state.lang === 'en' ? 'ar' : 'en');
+            });
+
+            // ========================================
+            // 5. Search + Highlighting
+            // ========================================
+            let searchTimeout;
+
+            elements.searchInput?.addEventListener('input', function () {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    performSearch(this.value.toLowerCase().trim());
+                }, 300);
+            });
+
+            function performSearch(query) {
+
+                // Reset state when empty
+                if (query === '') {
+                    elements.subsections.forEach(sub => {
+                        sub.style.display = 'block';
+                        removeHighlights(sub);
+                    });
+                    elements.sections.forEach(sec => sec.style.display = 'block');
+                    elements.navLinks.forEach(link => link.style.display = 'block');
+                    elements.navCategories.forEach(cat => cat.style.display = 'block');
+                    elements.noResults?.classList.add('hidden');
+                    return;
+                }
+
+                let hasResults = false;
+                const matchedSections = new Set();
+
+                elements.subsections.forEach(sub => {
+                    removeHighlights(sub);
+                    const text = sub.textContent.toLowerCase();
+
+                    if (text.includes(query)) {
+                        sub.style.display = 'block';
+                        highlightText(sub, query);
+                        hasResults = true;
+                        const parent = sub.closest('.content-section');
+                        if (parent) matchedSections.add(parent);
+                    } else {
+                        sub.style.display = 'none';
+                    }
+                });
+
+                elements.sections.forEach(sec => {
+                    sec.style.display = matchedSections.has(sec) ? 'block' : 'none';
+                });
+
+                elements.navLinks.forEach(link => {
+                    const text = link.textContent.toLowerCase();
+                    link.style.display = text.includes(query) ? 'block' : 'none';
+                });
+
+                // Handle nav categories
+                elements.navCategories.forEach(cat => {
+                    let next = cat.nextElementSibling;
+                    let visible = false;
+
+                    while (next && !next.classList.contains('nav-category')) {
+                        if (next.style.display !== 'none') {
+                            visible = true;
+                            break;
+                        }
+                        next = next.nextElementSibling;
+                    }
+
+                    cat.style.display = visible ? 'block' : 'none';
+                });
+
+                elements.noResults?.classList.toggle('hidden', hasResults);
+            }
+
+            function highlightText(element, query) {
+                const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
+                let node;
+                const nodes = [];
+
+                while (node = walker.nextNode()) nodes.push(node);
+
+                nodes.forEach(textNode => {
+                    const text = textNode.textContent;
+                    const lower = text.toLowerCase();
+                    const index = lower.indexOf(query);
+
+                    if (index !== -1) {
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        span.textContent = text.substr(index, query.length);
+
+                        const frag = document.createDocumentFragment();
+                        frag.append(text.slice(0, index));
+                        frag.append(span);
+                        frag.append(text.slice(index + query.length));
+
+                        textNode.parentNode.replaceChild(frag, textNode);
+                    }
+                });
+            }
+
+            function removeHighlights(element) {
+                element.querySelectorAll('.highlight').forEach(span => {
+                    span.replaceWith(span.textContent);
+                });
+                element.normalize();
+            }
+
+            // ========================================
+            // 6. Navigation & Scroll Spy
+            // ========================================
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting || !entry.target.offsetParent) return;
+
+                    const id = entry.target.id;
+                    elements.navLinks.forEach(link => {
+                        link.classList.toggle(
+                            'active',
+                            link.getAttribute('data-section') === id
+                        );
+                    });
+                });
+            }, { rootMargin: '-20% 0px -70% 0px' });
+
+            elements.sections.forEach(sec => observer.observe(sec));
+
+            elements.navLinks.forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(link.getAttribute('data-section'));
+                    if (!target) return;
+
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    elements.navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    if (window.innerWidth <= 768) {
+                        elements.sidebar?.classList.remove('open');
+                    }
+                });
+            });
+
+            // ========================================
+            // 7. Scroll To Top
+            // ========================================
+            if (elements.scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    elements.scrollToTopBtn.classList.toggle('show', window.scrollY > 400);
+                });
+
+                elements.scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // ========================================
+            // 8. Mobile Menu Toggle
+            // ========================================
+            if (window.innerWidth <= 768 && elements.sidebar) {
+                const btn = document.createElement('button');
+                btn.className = 'mobile-menu-toggle';
+                btn.innerHTML = '☰';
+                btn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            background: #1f2937;
+            color: white;
+            border: none;
+            z-index: 1001;
+            cursor: pointer;
+        `;
+                document.body.appendChild(btn);
+
+                btn.addEventListener('click', () => {
+                    elements.sidebar.classList.toggle('open');
+                });
+            }
+
+            // ========================================
+            // 9. Init
+            // ========================================
+            switchLanguage(state.lang);
+        });
+    </script>
+</body>
+
+</html>
