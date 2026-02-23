@@ -158,7 +158,6 @@
     line-height: 1.75;
 }
 
-
 /* Video Container */
 .subsection-content .video-container {
     position: relative;
@@ -206,12 +205,10 @@
     font-weight: 500;
 }
 
-/* Info Box (restored from old guide) */
+/* Info Box */
 .subsection-content .info-box {
     background-color: rgba(252, 211, 77, 0.1);
-    /* amber-300/10 */
     border-left: 4px solid #FCD34D;
-    /* amber-300 */
     padding: 1rem 1.25rem;
     border-radius: 0.5rem;
     margin: 1.5rem 0;
@@ -220,13 +217,11 @@
 .subsection-content .info-box-title {
     font-weight: 600;
     color: #92400e;
-    /* amber-800 */
     margin-bottom: 0.5rem;
 }
 
 .subsection-content .info-box-text {
     color: #78350f;
-    /* amber-900 */
     font-size: 0.9375rem;
     line-height: 1.6;
 }

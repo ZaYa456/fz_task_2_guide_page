@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title x-text="translations.pageTitle[lang]">Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Subsection content styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Fonts & base styles -->
     <style>
-        /* Font */
         @font-face {
             font-family: 'Figtree';
             font-style: normal;
@@ -18,7 +21,6 @@
             font-display: swap;
             src: url(https://fonts.bunny.net/figtree/files/figtree-latin-400-normal.woff2) format('woff2');
         }
-
         @font-face {
             font-family: 'Figtree';
             font-style: normal;
@@ -26,7 +28,6 @@
             font-display: swap;
             src: url(https://fonts.bunny.net/figtree/files/figtree-latin-500-normal.woff2) format('woff2');
         }
-
         @font-face {
             font-family: 'Figtree';
             font-style: normal;
@@ -40,21 +41,12 @@
             background-color: #FDFDFC;
         }
 
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
 
-        /* Shimmer skeleton */
         @keyframes shimmer {
-            0% {
-                background-position: 200% 0;
-            }
-
-            100% {
-                background-position: -200% 0;
-            }
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
-
         .skeleton {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
@@ -63,99 +55,137 @@
             margin-bottom: 0.875rem;
         }
     </style>
+
+    <!-- Config data — must load before dashboard.js and Alpine -->
+    <script src="js/config/navigation.js"></script>
+    <script src="js/config/translations.js"></script>
+
+    <!-- Alpine component -->
+    <script src="js/dashboard.js"></script>
+
+    <!-- Alpine — deferred so it runs after all scripts above are parsed -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="min-h-screen">
 
     <div class="flex min-h-screen">
 
-        <!-- Overlay -->
-        <div x-show="isMobileMenuOpen && isMobile" x-transition.opacity class="fixed inset-0 bg-black/40 z-40 md:hidden"
-            @click="isMobileMenuOpen = false"></div>
+        <!-- Mobile Overlay -->
+        <div x-show="isMobileMenuOpen && isMobile"
+             x-transition.opacity
+             class="fixed inset-0 bg-black/40 z-40 md:hidden"
+             @click="isMobileMenuOpen = false"></div>
 
-        <!-- Sidebar -->
-        <aside class="fixed top-0 h-screen w-[280px]
-       flex flex-col bg-white border-gray-200
-       z-50 transition-transform duration-300" :class="{
-           'left-0 border-r': lang === 'en',
-           'right-0 border-l': lang === 'ar',
-           'translate-x-0': !sidebarExiting && (isMobileMenuOpen || windowWidth >= 768),
-           '-translate-x-full': (sidebarExiting && lang === 'en') || (!isMobileMenuOpen && windowWidth < 768 && lang === 'en'),
-           'translate-x-full': (sidebarExiting && lang === 'ar') || (!isMobileMenuOpen && windowWidth < 768 && lang === 'ar')
-       }">
+        <!-- ═══════════════════════════════════
+             Sidebar
+        ═══════════════════════════════════ -->
+        <aside class="fixed top-0 h-screen w-[280px] flex flex-col bg-white border-gray-200
+                      z-50 transition-transform duration-300"
+               :class="{
+                   'left-0 border-r': lang === 'en',
+                   'right-0 border-l': lang === 'ar',
+                   'translate-x-0':    !sidebarExiting && (isMobileMenuOpen || windowWidth >= 768),
+                   '-translate-x-full': (sidebarExiting && lang === 'en') || (!isMobileMenuOpen && windowWidth < 768 && lang === 'en'),
+                   'translate-x-full':  (sidebarExiting && lang === 'ar') || (!isMobileMenuOpen && windowWidth < 768 && lang === 'ar')
+               }">
+
+            <!-- Header & Search -->
             <div class="px-6 pt-8 md:pt-0 pb-6 bg-gradient-to-br from-amber-400 to-red-500">
-                <div>
-                    <img src="images/alqaima-logo.png" alt="Al Qaima Logo"
-                        class="h-24 w-auto max-w-[190px] object-contain brightness-0 invert">
-                </div>
-                <h1 class="text-2xl font-bold text-white mb-1" x-text="translations.sidebarTitle[lang]"></h1>
+                <img src="images/alqaima-logo.png"
+                     :alt="translations.logoAlt[lang]"
+                     class="h-24 w-auto max-w-[190px] object-contain brightness-0 invert">
+
+                <h1 class="text-2xl font-bold text-white mb-1"
+                    x-text="translations.sidebarTitle[lang]"></h1>
                 <p class="text-xs text-white/80 font-medium uppercase tracking-widest mb-6"
-                    x-text="translations.sidebarSubtitle[lang]"></p>
+                   x-text="translations.sidebarSubtitle[lang]"></p>
+
+                <!-- Search -->
                 <div class="relative group mt-2">
-                    <span
-                        class="absolute inset-y-0 left-3 rtl:left-auto rtl:right-3 flex items-center pointer-events-none text-white/70 group-focus-within:text-white transition-colors">
+                    <span class="absolute inset-y-0 left-3 rtl:left-auto rtl:right-3
+                                 flex items-center pointer-events-none
+                                 text-white/70 group-focus-within:text-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </span>
-
-                    <input type="text" title="Search..." class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5 
-               bg-white/20 border border-white/30 rounded-xl
-               text-white text-sm placeholder:text-white/80
-               shadow-inner backdrop-blur-md transition-all
-               focus:outline-none focus:bg-white/30 focus:border-white/50 focus:ring-4 focus:ring-black/5"
-                        :placeholder="translations.searchPlaceholder[lang]" x-model.debounce.300ms="searchQuery">
+                    <input type="text"
+                           :title="translations.searchTitle[lang]"
+                           :placeholder="translations.searchPlaceholder[lang]"
+                           x-model.debounce.300ms="searchQuery"
+                           class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5
+                                  bg-white/20 border border-white/30 rounded-xl
+                                  text-white text-sm placeholder:text-white/80
+                                  shadow-inner backdrop-blur-md transition-all
+                                  focus:outline-none focus:bg-white/30 focus:border-white/50 focus:ring-4 focus:ring-black/5">
                     <div class="absolute inset-0 -z-10 bg-black/5 blur-md rounded-xl transform translate-y-1"></div>
                 </div>
             </div>
 
+            <!-- Navigation -->
             <nav class="flex-1 overflow-y-auto py-2">
                 <template x-for="cat in filteredNav" :key="cat.category.en">
                     <div>
-                        <div class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-600 font-bold"
-                            x-text="cat.category[lang]">
-                        </div> <template x-for="link in cat.links" :key="link.id">
-                            <a :href="`#${link.id}`" @click.prevent="selectSection(link.id)" class="block py-3 text-sm text-gray-700 transition border-l-[3px] 
-                        rtl:border-l-0 rtl:border-r-[3px] border-transparent
-                        hover:bg-yellow-300/10 hover:text-gray-900
-                        cursor-pointer" :class="{
-                        'bg-yellow-300/15 !border-yellow-300 text-gray-900 font-medium': currentSection === link.id,
-                        'pl-6 rtl:pr-6': !link.isSublink,
-                        'pl-10 rtl:pr-10': link.isSublink
-                    }" x-text="link.title[lang]">
-                            </a> </template>
+                        <div class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-zinc-600"
+                             x-text="cat.category[lang]"></div>
+
+                        <template x-for="link in cat.links" :key="link.id">
+                            <a :href="`#${link.id}`"
+                               @click.prevent="selectSection(link.id)"
+                               class="block py-3 text-sm text-gray-700 transition border-l-[3px]
+                                      rtl:border-l-0 rtl:border-r-[3px] border-transparent
+                                      hover:bg-yellow-300/10 hover:text-gray-900 cursor-pointer"
+                               :class="{
+                                   'bg-yellow-300/15 !border-yellow-300 text-gray-900 font-medium': currentSection === link.id,
+                                   'pl-6 rtl:pr-6':   !link.isSublink,
+                                   'pl-10 rtl:pr-10':  link.isSublink
+                               }"
+                               x-text="link.title[lang]">
+                            </a>
+                        </template>
                     </div>
                 </template>
             </nav>
         </aside>
 
-        <!-- Mobile Toggle -->
-        <button @click="toggleMobileMenu()" class="fixed top-4 left-4 rtl:left-auto rtl:right-4 z-[60]
-               bg-white border border-gray-200 rounded-md p-2 shadow-sm md:hidden">
+        <!-- ═══════════════════════════════════
+             Floating Buttons
+        ═══════════════════════════════════ -->
+
+        <!-- Mobile menu toggle -->
+        <button @click="toggleMobileMenu()"
+                :aria-label="isMobileMenuOpen ? translations.closeMenu[lang] : translations.openMenu[lang]"
+                class="fixed top-4 left-4 rtl:left-auto rtl:right-4 z-[60]
+                       bg-white border border-gray-200 rounded-md p-2 shadow-sm md:hidden">
             ☰
         </button>
-        <!-- Global Language Toggle -->
-        <button @click="toggleLanguage()" class="fixed top-4 right-4 rtl:right-auto rtl:left-4
-               z-[60]
-               flex items-center gap-2
-               px-4 py-2
-               rounded-full
-               bg-white border border-gray-200
-               shadow-sm
-               text-sm font-medium text-gray-700
-               transition
-               hover:shadow-md hover:-translate-y-0.5">
 
-            <span>🌍</span>
-
+        <!-- Language toggle -->
+        <button @click="toggleLanguage()"
+                :aria-label="translations.toggleLang[lang]"
+                class="fixed top-4 right-4 rtl:right-auto rtl:left-4 z-[60]
+                       flex items-center gap-2 px-4 py-2 rounded-full
+                       bg-white border border-gray-200 shadow-sm
+                       text-sm font-medium text-gray-700 transition
+                       hover:shadow-md hover:-translate-y-0.5">
+            <span aria-hidden="true">🌍</span>
             <span x-text="lang === 'en' ? 'AR' : 'EN'"></span>
-
         </button>
-        <!-- Main Content -->
-        <main
-            class="flex-1 px-6 md:px-16 py-10 md:pt-0 md:pb-12 max-w-[1200px] md:ml-[280px] rtl:md:ml-0 rtl:md:mr-[280px]">
-            <section x-show="currentSection" x-ref="contentArea" tabindex="-1" class="content-section outline-none">
+
+        <!-- ═══════════════════════════════════
+             Main Content
+        ═══════════════════════════════════ -->
+        <main class="flex-1 px-6 md:px-16 py-10 md:pt-0 md:pb-12
+                     max-w-[1200px] md:ml-[280px] rtl:md:ml-0 rtl:md:mr-[280px]">
+
+            <section x-show="currentSection"
+                     x-ref="contentArea"
+                     tabindex="-1"
+                     class="content-section outline-none">
+
+                <!-- Skeleton loader -->
                 <template x-if="!loadedSubsections[currentSection]">
                     <div class="pt-1 pb-6">
                         <div class="skeleton h-7 w-[55%]"></div>
@@ -163,267 +193,41 @@
                         <div class="skeleton h-4 w-3/4"></div>
                         <div class="skeleton h-52 w-full rounded-xl mt-4"></div>
                     </div>
-                </template> <template x-if="loadedSubsections[currentSection]">
-                    <div class="subsection-content" x-html="loadedSubsections[currentSection]">
-                    </div>
+                </template>
+
+                <!-- Loaded content -->
+                <template x-if="loadedSubsections[currentSection]">
+                    <div class="subsection-content fade-in"
+                         x-html="loadedSubsections[currentSection]"></div>
                 </template>
             </section>
 
-            <div class="text-center py-12 text-zinc-600 font-bold" x-show="filteredNav.length === 0" x-cloak>
+            <!-- No results -->
+            <div class="text-center py-12 text-zinc-600 font-bold"
+                 x-show="filteredNav.length === 0"
+                 x-cloak>
                 <div class="text-5xl mb-4 opacity-50">🔍</div>
-                <div class="text-xl font-semibold mb-2" x-text="translations.noResultsText.title[lang]"></div>
-                <div class="text-[0.9375rem]" x-text="translations.noResultsText.desc[lang]"></div>
+                <div class="text-xl font-semibold mb-2"
+                     x-text="translations.noResultsText.title[lang]"></div>
+                <div class="text-[0.9375rem]"
+                     x-text="translations.noResultsText.desc[lang]"></div>
             </div>
         </main>
 
-        <!-- Scroll To Top -->
-        <button @click="scrollToTop()" x-show="showScrollTop" x-cloak class="fixed bottom-8 right-8 rtl:right-auto rtl:left-8
-               w-12 h-12 flex items-center justify-center
-               text-white rounded-full text-2xl shadow-md
-               transition hover:-translate-y-1 hover:shadow-lg
-               bg-gradient-to-br from-amber-300 to-red-500 z-50">
+        <!-- Scroll to top -->
+        <button @click="scrollToTop()"
+                :aria-label="translations.scrollToTop[lang]"
+                x-show="showScrollTop"
+                x-cloak
+                class="fixed bottom-8 right-8 rtl:right-auto rtl:left-8 z-50
+                       w-12 h-12 flex items-center justify-center
+                       text-white rounded-full text-2xl shadow-md
+                       bg-gradient-to-br from-amber-300 to-red-500
+                       transition hover:-translate-y-1 hover:shadow-lg">
             ↑
         </button>
 
     </div>
 
-    <script>
-        function dashboard() {
-            return {
-
-                /* ==============================
-                   STATE
-                ============================== */
-                lang: localStorage.getItem('dashboardLang') || 'en',
-                currentSection: null,
-                loadedSubsections: {},
-                searchQuery: '',
-                filteredNav: [],
-                windowWidth: window.innerWidth,
-                isMobileMenuOpen: window.innerWidth >= 768,
-                showScrollTop: false,
-                sidebarExiting: false,
-
-                get isMobile() {
-                    return this.windowWidth < 768;
-                },
-
-                /* ==============================
-                   NAVIGATION STRUCTURE
-                ============================== */
-                navItems: [
-                    {
-                        category: { en: 'Getting Started', ar: 'البدء' },
-                        links: [
-                            { id: 'dashboard-overview', title: { en: 'Dashboard Overview', ar: 'نظرة عامة على لوحة التحكم' } },
-                            { id: 'changing-language', title: { en: 'Changing Language', ar: 'تغيير اللغة' } },
-                        ]
-                    },
-                    {
-                        category: { en: 'Profile Management', ar: 'إدارة الملف الشخصي' },
-                        links: [
-                            { id: 'profile-username', title: { en: 'Update Username', ar: 'تحديث اسم المستخدم' } },
-                            { id: 'profile-email', title: { en: 'Update Email', ar: 'تحديث البريد الإلكتروني' } },
-                            { id: 'profile-password', title: { en: 'Update Password', ar: 'تحديث كلمة المرور' } },
-                            { id: 'profile-delete', title: { en: 'Delete Account', ar: 'حذف الحساب' } },
-                        ]
-                    },
-                    {
-                        category: { en: 'Restaurant Setup', ar: 'إعداد المطعم' },
-                        links: [
-                            { id: 'settings-overview', title: { en: 'Settings Overview', ar: 'نظرة عامة على الإعدادات' } },
-                            { id: 'settings-logo', title: { en: 'Upload Logo', ar: 'تحميل الشعار' }, isSublink: true },
-                            { id: 'settings-cover', title: { en: 'Upload Cover Photo', ar: 'تحميل صورة الغلاف' }, isSublink: true },
-                            { id: 'settings-info', title: { en: 'Restaurant Information', ar: 'معلومات المطعم' }, isSublink: true },
-                            { id: 'settings-colors', title: { en: 'Brand Colors', ar: 'ألوان العلامة التجارية' }, isSublink: true },
-                            { id: 'settings-qr', title: { en: 'QR Code for Menu', ar: 'رمز QR للقائمة' }, isSublink: true },
-                            { id: 'settings-social', title: { en: 'Social Media Links', ar: 'روابط وسائل التواصل' }, isSublink: true },
-                            { id: 'settings-other', title: { en: 'Other Settings', ar: 'إعدادات أخرى' }, isSublink: true },
-                        ]
-                    },
-                    {
-                        category: { en: 'Menu Management', ar: 'إدارة القائمة' },
-                        links: [
-                            { id: 'categories-overview', title: { en: 'Categories Overview', ar: 'نظرة عامة على الفئات' } },
-                            { id: 'categories-add', title: { en: 'Add Category', ar: 'إضافة فئة' }, isSublink: true },
-                            { id: 'categories-excel', title: { en: 'Import/Export Excel', ar: 'استيراد/تصدير Excel' }, isSublink: true },
-                            { id: 'categories-search', title: { en: 'Search Categories', ar: 'البحث في الفئات' }, isSublink: true },
-
-                            { id: 'products-overview', title: { en: 'Products Overview', ar: 'نظرة عامة على المنتجات' } },
-                            { id: 'products-add', title: { en: 'Add Product', ar: 'إضافة منتج' }, isSublink: true },
-                            { id: 'products-excel', title: { en: 'Import/Export Excel', ar: 'استيراد/تصدير Excel' }, isSublink: true },
-                            { id: 'products-filter', title: { en: 'Filter Products', ar: 'تصفية المنتجات' }, isSublink: true },
-                            { id: 'products-pin', title: { en: 'Pin Products', ar: 'تثبيت المنتجات' }, isSublink: true },
-                        ]
-                    },
-                    {
-                        category: { en: 'Team Management', ar: 'إدارة الفريق' },
-                        links: [
-                            { id: 'users-overview', title: { en: 'Users Overview', ar: 'نظرة عامة على المستخدمين' } },
-                            { id: 'users-add', title: { en: 'Add New User', ar: 'إضافة مستخدم جديد' }, isSublink: true },
-                            { id: 'users-edit', title: { en: 'Edit User', ar: 'تعديل المستخدم' }, isSublink: true },
-                        ]
-                    },
-                    {
-                        category: { en: 'Customer Experience', ar: 'تجربة العملاء' },
-                        links: [
-                            { id: 'public-menu-overview', title: { en: 'Public Menu Overview', ar: 'نظرة عامة على القائمة العامة' } },
-                            { id: 'public-menu-search', title: { en: 'Search & Browse', ar: 'البحث والتصفح' }, isSublink: true },
-                            { id: 'public-menu-cart', title: { en: 'Add to Cart', ar: 'إضافة إلى السلة' }, isSublink: true },
-                            { id: 'public-menu-whatsapp', title: { en: 'WhatsApp Orders', ar: 'طلبات واتساب' }, isSublink: true },
-                            { id: 'public-menu-language', title: { en: 'Language & Dark Mode', ar: 'اللغة والوضع الداكن' }, isSublink: true },
-                            { id: 'public-menu-about', title: { en: 'About Us Section', ar: 'قسم من نحن' }, isSublink: true },
-                        ]
-                    },
-                    {
-                        category: { en: 'Analytics & Billing', ar: 'التحليلات والفواتير' },
-                        links: [
-                            { id: 'reports', title: { en: 'Reports & Analytics', ar: 'التقارير والتحليلات' } },
-                            { id: 'billing', title: { en: 'Billing & Subscription', ar: 'الفواتير والاشتراك' } },
-                        ]
-                    },
-                    {
-                        category: { en: 'Help', ar: 'المساعدة' },
-                        links: [
-                            { id: 'faq', title: { en: 'FAQ & Troubleshooting', ar: 'الأسئلة الشائعة واستكشاف الأخطاء' } },
-                        ]
-                    },
-                ],
-
-                // ========================================
-                // Translations
-                // ========================================
-                translations: {
-                    sidebarTitle: { en: 'Dashboard Guide', ar: 'دليل لوحة التحكم' },
-                    sidebarSubtitle: { en: 'Everything you need to manage your restaurant', ar: 'كل ما تحتاجه لإدارة مطعمك' },
-                    pageTitle: { en: 'Welcome to Your Dashboard', ar: 'مرحباً بك في لوحة التحكم' },
-                    pageDescription: {
-                        en: 'This comprehensive guide will help you navigate and make the most of your restaurant dashboard. Use the sidebar to jump to specific sections, or use the search function to find exactly what you need.',
-                        ar: 'سيساعدك هذا الدليل الشامل في التنقل وتحقيق أقصى استفادة من لوحة تحكم مطعمك. استخدم الشريط الجانبي للانتقال إلى أقسام محددة، أو استخدم وظيفة البحث للعثور على ما تحتاجه بالضبط.'
-                    },
-                    searchPlaceholder: { en: 'Search guide...', ar: 'ابحث في الدليل...' },
-                    noResultsText: {
-                        icon: { en: '🔍', ar: '🔍' },
-                        title: { en: 'No Results Found', ar: 'لا توجد نتائج' },
-                        desc: {
-                            en: 'We couldn\'t find any content matching your search. Try different keywords or browse the sections using the navigation menu.',
-                            ar: 'لم نتمكن من العثور على أي محتوى يطابق بحثك. جرب كلمات رئيسية مختلفة أو تصفح الأقسام باستخدام قائمة التنقل.'
-                        }
-                    }
-                },
-
-                /* ==============================
-                   INIT
-                ============================== */
-                init() {
-                    this.filteredNav = this.navItems;
-
-                    this.$watch('searchQuery', (q) => {
-                        if (!q) {
-                            this.filteredNav = this.navItems;
-                            return;
-                        }
-
-                        const search = q.toLowerCase();
-
-                        this.filteredNav = this.navItems
-                            .map(cat => ({
-                                ...cat,
-                                links: cat.links.filter(link =>
-                                    link.title.en.toLowerCase().includes(search) ||
-                                    link.title.ar.toLowerCase().includes(search)
-                                )
-                            }))
-                            .filter(cat => cat.links.length > 0);
-                    });
-
-                    const first = window.location.hash.substring(1) || this.navItems[0]?.links[0]?.id;
-                    if (first) this.selectSection(first);
-
-                    window.addEventListener('resize', () => {
-                        this.windowWidth = window.innerWidth;
-                        if (!this.isMobile) this.isMobileMenuOpen = true;
-                    });
-
-                    window.addEventListener('scroll', () => {
-                        this.showScrollTop = window.scrollY > 400;
-                    });
-                },
-
-                /* ==============================
-                   METHODS
-                ============================== */
-                toggleMobileMenu() {
-                    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-                },
-
-                toggleLanguage() {
-                    const next = this.lang === 'en' ? 'ar' : 'en';
-
-                    // Step 1: slide the sidebar out on the current side
-                    this.sidebarExiting = true;
-
-                    setTimeout(() => {
-                        // Step 2: flip lang + position (no transition active mid-swap)
-                        this.lang = next;
-                        localStorage.setItem('dashboardLang', next);
-
-                        // Step 3: one frame later, slide it back in and translate content
-                        requestAnimationFrame(() => {
-                            this.sidebarExiting = false;
-                            this.$nextTick(() => this.translateContent());
-                        });
-                    }, 300); // matches duration-300
-                },
-
-                scrollToTop() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                },
-
-                translateContent() {
-                    const lang = this.lang;
-                    document.querySelectorAll('[data-en]').forEach(el => {
-                        const text = el.getAttribute('data-' + lang);
-                        if (text !== null) el.textContent = text;
-                    });
-                },
-
-                async selectSection(id) {
-                    this.currentSection = id;
-
-                    // 1. Fetch content if not already loaded
-                    if (!this.loadedSubsections[id]) {
-                        const res = await fetch(`subsections/${id}.html`);
-                        this.loadedSubsections[id] = res.ok
-                            ? await res.text()
-                            : `<div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg">
-                 ⚠️ Failed to load content.
-               </div>`;
-                    }
-
-                    // 2. Manage Mobile UI
-                    if (this.isMobile) {
-                        this.isMobileMenuOpen = false;
-                    }
-
-                    // 3. Update URL without page jump
-                    history.pushState({ section: id }, '', `#${id}`);
-
-                    // 4. Smooth scroll and Focus Management
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                    // Wait for Alpine to render the x-html before translating + focusing
-                    this.$nextTick(() => {
-                        this.translateContent();
-                        if (this.$refs.contentArea) {
-                            this.$refs.contentArea.focus();
-                        }
-                    });
-                }
-            }
-        }
-    </script>
-
 </body>
-
 </html>
