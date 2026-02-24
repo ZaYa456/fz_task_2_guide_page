@@ -128,16 +128,24 @@
     scroll-margin-top: 2rem;
 }
 
-/* Section main header (gradient pill) */
+/* Section main header (left-border accent) */
 .subsection-content>h2:first-child {
-    display: inline-block;
-    background: linear-gradient(135deg, #FCD34D 0%, #EF4444 100%);
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
+    display: block;
+    background: none;
+    color: #111827;
     font-size: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
+    font-weight: 700;
+    padding: 0 0 0.625rem 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1.75rem;
+    border-left: 4px solid #f59e0b;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+[dir="rtl"] .subsection-content>h2:first-child {
+    padding: 0 1rem 0.625rem 0;
+    border-left: none;
+    border-right: 4px solid #f59e0b;
 }
 
 /* Subsection block */
@@ -247,4 +255,109 @@
 
 .fade-in {
     animation: fadeInUp 0.35s ease forwards;
+}
+
+/* =========================================
+   Next Section Button
+========================================= */
+.next-section-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #fbbf24 0%, #ef4444 100%);
+    color: #fff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 0.625rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+    text-decoration: none;
+}
+
+.next-section-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
+}
+
+.next-section-btn .btn-arrow {
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+    line-height: 1;
+}
+
+[dir="rtl"] .next-section-btn .btn-arrow {
+    transform: scaleX(-1);
+}
+
+.next-section-btn:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+[dir="rtl"] .next-section-btn:hover .btn-arrow {
+    transform: scaleX(-1) translateX(3px);
+}
+
+.next-section-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.85;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.15rem;
+}
+
+.next-section-title {
+    display: block;
+    line-height: 1.2;
+}
+
+/* =========================================
+   FAQ Accordion
+========================================= */
+.faq-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.625rem;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background-color: #fafafa;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: #1f2937;
+    gap: 1rem;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.faq-question:hover {
+    background-color: #f3f4f6;
+}
+
+.faq-icon {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    transition: transform 0.25s ease;
+}
+
+.faq-answer {
+    background-color: #fff;
+}
+
+.faq-answer-content {
+    padding: 1rem 1.25rem;
+    font-size: 0.9375rem;
+    color: #4b5563;
+    line-height: 1.75;
+    border-top: 1px solid #f3f4f6;
 }

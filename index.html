@@ -12,6 +12,11 @@
     <!-- Subsection content styles -->
     <link rel="stylesheet" href="css/styles.css">
 
+    <!-- Favicon and theme -->
+    <link rel="icon" href="images/alqaima-logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/alqaima-logo.png">
+    <meta name="theme-color" content="#f59e0b">
+
     <!-- Fonts & base styles -->
     <style>
         @font-face {
@@ -21,6 +26,7 @@
             font-display: swap;
             src: url(https://fonts.bunny.net/figtree/files/figtree-latin-400-normal.woff2) format('woff2');
         }
+
         @font-face {
             font-family: 'Figtree';
             font-style: normal;
@@ -28,6 +34,7 @@
             font-display: swap;
             src: url(https://fonts.bunny.net/figtree/files/figtree-latin-500-normal.woff2) format('woff2');
         }
+
         @font-face {
             font-family: 'Figtree';
             font-style: normal;
@@ -41,12 +48,20 @@
             background-color: #FDFDFC;
         }
 
-        [x-cloak] { display: none !important; }
+        [x-cloak] {
+            display: none !important;
+        }
 
         @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
+
         .skeleton {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
@@ -72,17 +87,14 @@
     <div class="flex min-h-screen">
 
         <!-- Mobile Overlay -->
-        <div x-show="isMobileMenuOpen && isMobile"
-             x-transition.opacity
-             class="fixed inset-0 bg-black/40 z-40 md:hidden"
-             @click="isMobileMenuOpen = false"></div>
+        <div x-show="isMobileMenuOpen && isMobile" x-transition.opacity class="fixed inset-0 bg-black/40 z-40 md:hidden"
+            @click="isMobileMenuOpen = false"></div>
 
         <!-- ═══════════════════════════════════
              Sidebar
         ═══════════════════════════════════ -->
         <aside class="fixed top-0 h-screen w-[280px] flex flex-col bg-white border-gray-200
-                      z-50 transition-transform duration-300"
-               :class="{
+                      z-50 transition-transform duration-300" :class="{
                    'left-0 border-r': lang === 'en',
                    'right-0 border-l': lang === 'ar',
                    'translate-x-0':    !sidebarExiting && (isMobileMenuOpen || windowWidth >= 768),
@@ -92,14 +104,12 @@
 
             <!-- Header & Search -->
             <div class="px-6 pt-8 md:pt-0 pb-6 bg-gradient-to-br from-amber-400 to-red-500">
-                <img src="images/alqaima-logo.png"
-                     :alt="translations.logoAlt[lang]"
-                     class="h-24 w-auto max-w-[190px] object-contain brightness-0 invert">
+                <img src="images/alqaima-logo.png" :alt="translations.logoAlt[lang]"
+                    class="h-24 w-auto max-w-[190px] object-contain brightness-0 invert">
 
-                <h1 class="text-2xl font-bold text-white mb-1"
-                    x-text="translations.sidebarTitle[lang]"></h1>
+                <h1 class="text-2xl font-bold text-white mb-1" x-text="translations.sidebarTitle[lang]"></h1>
                 <p class="text-xs text-white/80 font-medium uppercase tracking-widest mb-6"
-                   x-text="translations.sidebarSubtitle[lang]"></p>
+                    x-text="translations.sidebarSubtitle[lang]"></p>
 
                 <!-- Search -->
                 <div class="relative group mt-2">
@@ -108,14 +118,12 @@
                                  text-white/70 group-focus-within:text-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </span>
-                    <input type="text"
-                           :title="translations.searchTitle[lang]"
-                           :placeholder="translations.searchPlaceholder[lang]"
-                           x-model.debounce.300ms="searchQuery"
-                           class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5
+                    <input type="text" :title="translations.searchTitle[lang]"
+                        :placeholder="translations.searchPlaceholder[lang]" x-model.debounce.300ms="searchQuery"
+                        class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5
                                   bg-white/20 border border-white/30 rounded-xl
                                   text-white text-sm placeholder:text-white/80
                                   shadow-inner backdrop-blur-md transition-all
@@ -124,27 +132,44 @@
                 </div>
             </div>
 
-            <!-- Navigation -->
+            <!-- Navigation (accordion) -->
             <nav class="flex-1 overflow-y-auto py-2">
                 <template x-for="cat in filteredNav" :key="cat.category.en">
                     <div>
-                        <div class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-zinc-600"
-                             x-text="cat.category[lang]"></div>
+                        <!-- Category header — toggle accordion -->
+                        <button @click="toggleCategory(cat.category.en)" class="w-full flex items-center justify-between
+                                       px-4 py-2.5 text-left rtl:text-right
+                                       bg-zinc-100 hover:bg-zinc-200
+                                       border-b border-zinc-100
+                                       transition-colors cursor-pointer">
+                            <span class="text-xs font-bold uppercase tracking-wider text-zinc-500"
+                                x-text="cat.category[lang]"></span>
+                            <!-- Chevron: rotates when open -->
+                            <svg class="w-3.5 h-3.5 text-zinc-400 flex-shrink-0 transition-transform duration-200 rtl:ml-0 rtl:mr-auto ml-auto"
+                                :class="{ 'rotate-180': openCategories.has(cat.category.en) || searchQuery }"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
 
-                        <template x-for="link in cat.links" :key="link.id">
-                            <a :href="`#${link.id}`"
-                               @click.prevent="selectSection(link.id)"
-                               class="block py-3 text-sm text-gray-700 transition border-l-[3px]
-                                      rtl:border-l-0 rtl:border-r-[3px] border-transparent
-                                      hover:bg-yellow-300/10 hover:text-gray-900 cursor-pointer"
-                               :class="{
-                                   'bg-yellow-300/15 !border-yellow-300 text-gray-900 font-medium': currentSection === link.id,
-                                   'pl-6 rtl:pr-6':   !link.isSublink,
-                                   'pl-10 rtl:pr-10':  link.isSublink
-                               }"
-                               x-text="link.title[lang]">
-                            </a>
-                        </template>
+                        <!-- Links — shown when open or searching -->
+                        <div x-show="openCategories.has(cat.category.en) || searchQuery"
+                            x-transition:enter="transition-all duration-200 ease-out"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition-all duration-150 ease-in"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 -translate-y-1" class="bg-white pl-3 rtl:pl-0 rtl:pr-3">
+                            <template x-for="link in cat.links" :key="link.id">
+                                <a :href="`#${link.id}`" @click.prevent="selectSection(link.id)" class="block py-2.5 pl-5 rtl:pl-0 rtl:pr-5 text-sm text-gray-600 transition
+                                    border-l-[3px] rtl:border-l-0 rtl:border-r-[3px] border-transparent
+                                    hover:bg-yellow-300/10 hover:text-gray-900 cursor-pointer"
+                                    :class="{ 'bg-yellow-300/15 !border-yellow-400 text-gray-900 font-semibold': currentSection === link.id }"
+                                    x-text="link.title[lang]">
+                                </a>
+                            </template>
+                        </div>
                     </div>
                 </template>
             </nav>
@@ -156,16 +181,13 @@
 
         <!-- Mobile menu toggle -->
         <button @click="toggleMobileMenu()"
-                :aria-label="isMobileMenuOpen ? translations.closeMenu[lang] : translations.openMenu[lang]"
-                class="fixed top-4 left-4 rtl:left-auto rtl:right-4 z-[60]
+            :aria-label="isMobileMenuOpen ? translations.closeMenu[lang] : translations.openMenu[lang]" class="fixed top-4 left-4 rtl:left-auto rtl:right-4 z-[60]
                        bg-white border border-gray-200 rounded-md p-2 shadow-sm md:hidden">
             ☰
         </button>
 
         <!-- Language toggle -->
-        <button @click="toggleLanguage()"
-                :aria-label="translations.toggleLang[lang]"
-                class="fixed top-4 right-4 rtl:right-auto rtl:left-4 z-[60]
+        <button @click="toggleLanguage()" :aria-label="translations.toggleLang[lang]" class="fixed top-4 right-4 rtl:right-auto rtl:left-4 z-[60]
                        flex items-center gap-2 px-4 py-2 rounded-full
                        bg-white border border-gray-200 shadow-sm
                        text-sm font-medium text-gray-700 transition
@@ -180,10 +202,7 @@
         <main class="flex-1 px-6 md:px-16 py-10 md:pt-0 md:pb-12
                      max-w-[1200px] md:ml-[280px] rtl:md:ml-0 rtl:md:mr-[280px]">
 
-            <section x-show="currentSection"
-                     x-ref="contentArea"
-                     tabindex="-1"
-                     class="content-section outline-none">
+            <section x-show="currentSection" x-ref="contentArea" tabindex="-1" class="content-section outline-none">
 
                 <!-- Skeleton loader -->
                 <template x-if="!loadedSubsections[currentSection]">
@@ -197,29 +216,47 @@
 
                 <!-- Loaded content -->
                 <template x-if="loadedSubsections[currentSection]">
-                    <div class="subsection-content fade-in"
-                         x-html="loadedSubsections[currentSection]"></div>
+                    <div>
+                        <div class="subsection-content fade-in" x-html="loadedSubsections[currentSection]"></div>
+
+                        <div x-show="nextSection || prevSection"
+                            class="mt-10 pt-6 border-t border-gray-100 flex items-center justify-between gap-4">
+                            <!-- Previous -->
+                            <button x-show="prevSection" @click="selectSection(prevSection)" class="next-section-btn">
+                                <span class="btn-arrow" aria-hidden="true">←</span>
+                                <span>
+                                    <span class="next-section-label"
+                                        x-text="translations.prevSectionLabel[lang]"></span>
+                                    <span class="next-section-title" x-text="prevSectionTitle"></span>
+                                </span>
+                            </button>
+                            <div x-show="!prevSection"></div>
+
+                            <!-- Next -->
+                            <button x-show="nextSection" @click="selectSection(nextSection)" class="next-section-btn">
+                                <span>
+                                    <span class="next-section-label"
+                                        x-text="translations.nextSectionLabel[lang]"></span>
+                                    <span class="next-section-title" x-text="nextSectionTitle"></span>
+                                </span>
+                                <span class="btn-arrow" aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </div>
                 </template>
             </section>
 
             <!-- No results -->
-            <div class="text-center py-12 text-zinc-600 font-bold"
-                 x-show="filteredNav.length === 0"
-                 x-cloak>
+            <div class="text-center py-12 text-zinc-600 font-bold" x-show="filteredNav.length === 0" x-cloak>
                 <div class="text-5xl mb-4 opacity-50">🔍</div>
-                <div class="text-xl font-semibold mb-2"
-                     x-text="translations.noResultsText.title[lang]"></div>
-                <div class="text-[0.9375rem]"
-                     x-text="translations.noResultsText.desc[lang]"></div>
+                <div class="text-xl font-semibold mb-2" x-text="translations.noResultsText.title[lang]"></div>
+                <div class="text-[0.9375rem]" x-text="translations.noResultsText.desc[lang]"></div>
             </div>
         </main>
 
         <!-- Scroll to top -->
-        <button @click="scrollToTop()"
-                :aria-label="translations.scrollToTop[lang]"
-                x-show="showScrollTop"
-                x-cloak
-                class="fixed bottom-8 right-8 rtl:right-auto rtl:left-8 z-50
+        <button @click="scrollToTop()" :aria-label="translations.scrollToTop[lang]" x-show="showScrollTop" x-cloak
+            class="fixed bottom-8 right-8 rtl:right-auto rtl:left-8 z-50
                        w-12 h-12 flex items-center justify-center
                        text-white rounded-full text-2xl shadow-md
                        bg-gradient-to-br from-amber-300 to-red-500
@@ -230,4 +267,5 @@
     </div>
 
 </body>
+
 </html>

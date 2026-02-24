@@ -24,8 +24,50 @@ function dashboard() {
 
         cacheVersion: 'v1', // Increment this to invalidate old cache
 
+        // Accordion state: Set of category keys that are open
+        openCategories: new Set(),
+
         get isMobile() {
             return this.windowWidth < 768;
+        },
+
+        // Flat ordered list of all section ids
+        get flatLinks() {
+            return this.navItems.flatMap(cat => cat.links.map(l => l.id));
+        },
+
+        // Previous section id before currentSection (null if first)
+        get prevSection() {
+            const flat = this.flatLinks;
+            const idx = flat.indexOf(this.currentSection);
+            return idx > 0 ? flat[idx - 1] : null;
+        },
+
+        // Title of the previous section in the current language
+        get prevSectionTitle() {
+            if (!this.prevSection) return '';
+            for (const cat of this.navItems) {
+                const link = cat.links.find(l => l.id === this.prevSection);
+                if (link) return link.title[this.lang];
+            }
+            return '';
+        },
+
+        // Next section id after currentSection (null if last)
+        get nextSection() {
+            const flat = this.flatLinks;
+            const idx = flat.indexOf(this.currentSection);
+            return idx !== -1 && idx < flat.length - 1 ? flat[idx + 1] : null;
+        },
+
+        // Title of the next section in the current language
+        get nextSectionTitle() {
+            if (!this.nextSection) return '';
+            for (const cat of this.navItems) {
+                const link = cat.links.find(l => l.id === this.nextSection);
+                if (link) return link.title[this.lang];
+            }
+            return '';
         },
 
         /* ==============================
@@ -59,7 +101,10 @@ function dashboard() {
 
             // Select first section (from hash or first nav item)
             const firstSection = window.location.hash.substring(1) || this.navItems[0]?.links[0]?.id;
-            if (firstSection) this.selectSection(firstSection);
+            if (firstSection) {
+                this.openCategoryFor(firstSection);
+                this.selectSection(firstSection);
+            }
 
             // Handle resize for mobile/desktop
             window.addEventListener('resize', () => {
@@ -84,6 +129,25 @@ function dashboard() {
         ============================== */
         toggleMobileMenu() {
             this.isMobileMenuOpen = !this.isMobileMenuOpen;
+        },
+
+        toggleCategory(categoryKey) {
+            if (this.openCategories.has(categoryKey)) {
+                this.openCategories.delete(categoryKey);
+            } else {
+                this.openCategories.add(categoryKey);
+            }
+            // Trigger Alpine reactivity — reassign the Set
+            this.openCategories = new Set(this.openCategories);
+        },
+
+        openCategoryFor(sectionId) {
+            for (const cat of this.navItems) {
+                if (cat.links.some(l => l.id === sectionId)) {
+                    this.openCategories = new Set([...this.openCategories, cat.category.en]);
+                    break;
+                }
+            }
         },
 
         toggleLanguage() {
@@ -123,10 +187,40 @@ function dashboard() {
                 const text = el.getAttribute('data-' + lang);
                 if (text !== null) el.textContent = text;
             });
+            this.initFaqAccordion();
+        },
+
+        initFaqAccordion() {
+            document.querySelectorAll('.faq-item').forEach(item => {
+                // Avoid double-binding
+                if (item.dataset.faqInit) return;
+                item.dataset.faqInit = 'true';
+
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+
+                if (!question || !answer) return;
+
+                // Initial state: collapsed
+                answer.style.maxHeight = '0';
+                answer.style.overflow = 'hidden';
+                answer.style.transition = 'max-height 0.25s ease';
+
+                question.style.cursor = 'pointer';
+
+                question.addEventListener('click', () => {
+                    const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '0';
+                    answer.style.maxHeight = isOpen ? '0' : answer.scrollHeight + 'px';
+                    if (icon) icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+                });
+            });
         },
 
         async selectSection(id) {
             this.currentSection = id;
+            this.searchQuery = '';
+            this.openCategoryFor(id);
             const cacheKey = `subsection-${id}-${this.cacheVersion}`;
 
             if (!this.loadedSubsections[id]) {
