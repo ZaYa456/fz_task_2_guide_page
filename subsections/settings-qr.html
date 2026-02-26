@@ -2,29 +2,36 @@
     <h2 data-en="QR Code for Menu" data-ar="رمز QR للقائمة">QR Code for Menu</h2>
 
     <p data-en="Generate a QR code that customers can scan to instantly access your digital menu. Print it on table tents, flyers, or display it at your restaurant entrance."
-       data-ar="أنشئ رمز QR يمكن للزبائن مسحه للوصول الفوري إلى قائمتك الرقمية. اطبعه على حوامل الطاولات أو المنشورات، أو اعرضه عند مدخل مطعمك.">
+        data-ar="أنشئ رمز QR يمكن للزبائن مسحه للوصول الفوري إلى قائمتك الرقمية. اطبعه على حوامل الطاولات أو المنشورات، أو اعرضه عند مدخل مطعمك.">
         Generate a QR code that customers can scan to instantly access your digital menu. Print
         it on table tents, flyers, or display it at your restaurant entrance.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="QR Code Video"
-                     data-ar="فيديو رمز QR">QR Code Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
+        <video data-src="assets/videos/settings-qr.mp4" controls preload="metadata">
+        </video>
     </div>
 
     <div class="info-box">
-        <div class="info-box-title"
-             data-en="📱 QR Code Tips"
-             data-ar="📱 نصائح رمز QR">📱 QR Code Tips</div>
+        <div class="info-box-title" data-en="📱 QR Code Tips" data-ar="📱 نصائح رمز QR">📱 QR Code Tips</div>
         <div class="info-box-text"
-             data-en="Download your QR code in high resolution for printing. Test it with multiple devices to ensure it works properly. Place it in visible locations where customers can easily scan it."
-             data-ar="نزّل رمز QR بدقة عالية للطباعة. اختبره على أجهزة متعددة للتأكد من عمله بشكل صحيح. ضعه في أماكن بارزة يسهل على الزبائن مسحه منها.">
+            data-en="Download your QR code in high resolution for printing. Test it with multiple devices to ensure it works properly. Place it in visible locations where customers can easily scan it."
+            data-ar="نزّل رمز QR بدقة عالية للطباعة. اختبره على أجهزة متعددة للتأكد من عمله بشكل صحيح. ضعه في أماكن بارزة يسهل على الزبائن مسحه منها.">
             Download your QR code in high resolution for printing. Test it with multiple devices
             to ensure it works properly. Place it in visible locations where customers can easily scan it.
         </div>

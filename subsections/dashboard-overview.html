@@ -2,36 +2,38 @@
     <h2 data-en="Dashboard Overview" data-ar="نظرة عامة على لوحة التحكم">Dashboard Overview</h2>
 
     <p data-en="Your dashboard is the central hub for managing your restaurant's online presence. From here, you can manage your menu, track orders, update settings, and much more."
-       data-ar="لوحة التحكم هي المركز الرئيسي لإدارة حضور مطعمك على الإنترنت. من هنا يمكنك إدارة قائمتك، ومتابعة الطلبات، وتحديث الإعدادات، والمزيد.">
+        data-ar="لوحة التحكم هي المركز الرئيسي لإدارة حضور مطعمك على الإنترنت. من هنا يمكنك إدارة قائمتك، ومتابعة الطلبات، وتحديث الإعدادات، والمزيد.">
         Your dashboard is the central hub for managing your restaurant's online presence.
         From here, you can manage your menu, track orders, update settings, and much more.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="Dashboard Overview Video"
-                     data-ar="فيديو نظرة عامة على لوحة التحكم">Dashboard Overview Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
-        <!-- Replace with actual video embed:
-        <iframe src="YOUR_VIDEO_URL" frameborder="0" allowfullscreen></iframe>
-        -->
+        <video data-src="assets/videos/dashboard-overview.mp4" controls preload="metadata">
+        </video>
     </div>
 
     <div class="info-box">
-        <div class="info-box-title"
-             data-en="💡 Quick Tip"
-             data-ar="💡 نصيحة سريعة">💡 Quick Tip</div>
+        <div class="info-box-title" data-en="💡 Quick Tip" data-ar="💡 نصيحة سريعة">💡 Quick Tip</div>
         <div class="info-box-text"
-             data-en="Take a moment to familiarize yourself with the main navigation menu. Each section is designed to help you manage a specific aspect of your restaurant."
-             data-ar="خذ لحظة للتعرف على قائمة التنقل الرئيسية. كل قسم مصمم لمساعدتك في إدارة جانب معين من مطعمك.">
+            data-en="Take a moment to familiarize yourself with the main navigation menu. Each section is designed to help you manage a specific aspect of your restaurant."
+            data-ar="خذ لحظة للتعرف على قائمة التنقل الرئيسية. كل قسم مصمم لمساعدتك في إدارة جانب معين من مطعمك.">
             Take a moment to familiarize yourself with the main navigation menu. Each section is
             designed to help you manage a specific aspect of your restaurant.
         </div>
     </div>
 </div>
-
-

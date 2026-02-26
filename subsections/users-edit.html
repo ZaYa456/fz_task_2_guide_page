@@ -2,29 +2,37 @@
     <h2 data-en="Edit User" data-ar="تعديل المستخدم">Edit User</h2>
 
     <p data-en="Update user information, change permissions, or remove users who no longer need access. Keep your team list current for better security."
-       data-ar="حدّث معلومات المستخدم أو غيّر صلاحياته أو أزل المستخدمين الذين لم يعودوا بحاجة إلى الوصول. احرص على تحديث قائمة فريقك باستمرار لأمان أفضل.">
+        data-ar="حدّث معلومات المستخدم أو غيّر صلاحياته أو أزل المستخدمين الذين لم يعودوا بحاجة إلى الوصول. احرص على تحديث قائمة فريقك باستمرار لأمان أفضل.">
         Update user information, change permissions, or remove users who no longer need access.
         Keep your team list current for better security.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="Edit User Video"
-                     data-ar="فيديو تعديل المستخدم">Edit User Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
+        <video data-src="assets/videos/users-edit.mp4" controls preload="metadata">
+        </video>
     </div>
 
     <div class="info-box">
-        <div class="info-box-title"
-             data-en="👥 Team Management Best Practices"
-             data-ar="👥 أفضل ممارسات إدارة الفريق">👥 Team Management Best Practices</div>
+        <div class="info-box-title" data-en="👥 Team Management Best Practices" data-ar="👥 أفضل ممارسات إدارة الفريق">
+            👥 Team Management Best Practices</div>
         <div class="info-box-text"
-             data-en="Only give users the permissions they need. Regularly review your user list and remove former employees. Use unique accounts for each person rather than sharing credentials."
-             data-ar="امنح المستخدمين الصلاحيات التي يحتاجون إليها فقط. راجع قائمة المستخدمين بانتظام وأزل الموظفين السابقين. استخدم حسابات فريدة لكل شخص بدلًا من مشاركة بيانات تسجيل الدخول.">
+            data-en="Only give users the permissions they need. Regularly review your user list and remove former employees. Use unique accounts for each person rather than sharing credentials."
+            data-ar="امنح المستخدمين الصلاحيات التي يحتاجون إليها فقط. راجع قائمة المستخدمين بانتظام وأزل الموظفين السابقين. استخدم حسابات فريدة لكل شخص بدلًا من مشاركة بيانات تسجيل الدخول.">
             Only give users the permissions they need. Regularly review your user list and remove
             former employees. Use unique accounts for each person rather than sharing credentials.
         </div>

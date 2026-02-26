@@ -2,29 +2,37 @@
     <h2 data-en="Add Product" data-ar="إضافة منتج">Add Product</h2>
 
     <p data-en="Add new menu items to your restaurant. Include an appetizing photo, accurate description, pricing, and assign it to the appropriate category."
-       data-ar="أضف عناصر جديدة إلى قائمة مطعمك. أرفق صورة شهية ووصفًا دقيقًا وسعرًا، وعيّن المنتج للفئة المناسبة.">
+        data-ar="أضف عناصر جديدة إلى قائمة مطعمك. أرفق صورة شهية ووصفًا دقيقًا وسعرًا، وعيّن المنتج للفئة المناسبة.">
         Add new menu items to your restaurant. Include an appetizing photo, accurate description,
         pricing, and assign it to the appropriate category.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="Add Product Video"
-                     data-ar="فيديو إضافة منتج">Add Product Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
+        <video data-src="assets/videos/products-add.mp4" controls preload="metadata">
+        </video>
     </div>
 
     <div class="info-box">
-        <div class="info-box-title"
-             data-en="🍽️ Product Photo Tips"
-             data-ar="🍽️ نصائح لصور المنتجات">🍽️ Product Photo Tips</div>
+        <div class="info-box-title" data-en="🍽️ Product Photo Tips" data-ar="🍽️ نصائح لصور المنتجات">🍽️ Product Photo
+            Tips</div>
         <div class="info-box-text"
-             data-en="Use high-quality, well-lit photos. Show the dish as customers would receive it. Use a consistent style across all product photos for a professional look."
-             data-ar="استخدم صورًا عالية الجودة وجيدة الإضاءة. أظهر الطبق كما سيستلمه الزبائن. اعتمد أسلوبًا موحدًا في جميع صور المنتجات للحصول على مظهر احترافي.">
+            data-en="Use high-quality, well-lit photos. Show the dish as customers would receive it. Use a consistent style across all product photos for a professional look."
+            data-ar="استخدم صورًا عالية الجودة وجيدة الإضاءة. أظهر الطبق كما سيستلمه الزبائن. اعتمد أسلوبًا موحدًا في جميع صور المنتجات للحصول على مظهر احترافي.">
             Use high-quality, well-lit photos. Show the dish as customers would receive it.
             Use a consistent style across all product photos for a professional look.
         </div>

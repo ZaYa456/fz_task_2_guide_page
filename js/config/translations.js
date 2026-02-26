@@ -22,6 +22,8 @@ const TRANSLATIONS = {
         en: '⚠️ Failed to load content. Please refresh the page.',
         ar: '⚠️ فشل تحميل المحتوى. يرجى تحديث الصفحة.'
     },
+    videoLoading: { en: 'Loading video...', ar: 'جاري تحميل الفيديو...' },
+    videoError: { en: 'Video unavailable', ar: 'الفيديو غير متاح' },
     noResultsText: {
         title: { en: 'No Results Found', ar: 'لا توجد نتائج' },
         desc: {

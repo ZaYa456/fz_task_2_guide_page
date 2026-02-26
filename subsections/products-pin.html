@@ -2,19 +2,28 @@
     <h2 data-en="Pin Products" data-ar="تثبيت المنتجات">Pin Products</h2>
 
     <p data-en="Highlight your best-selling or featured items by pinning them. Pinned products appear prominently on your menu to attract customer attention."
-       data-ar="أبرز منتجاتك الأكثر مبيعًا أو المميزة عن طريق تثبيتها. تظهر المنتجات المثبتة بشكل بارز في قائمتك لجذب انتباه الزبائن.">
+        data-ar="أبرز منتجاتك الأكثر مبيعًا أو المميزة عن طريق تثبيتها. تظهر المنتجات المثبتة بشكل بارز في قائمتك لجذب انتباه الزبائن.">
         Highlight your best-selling or featured items by pinning them. Pinned products appear
         prominently on your menu to attract customer attention.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="Pin Products Video"
-                     data-ar="فيديو تثبيت المنتجات">Pin Products Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
+        <video data-src="assets/videos/products-pin.mp4" controls preload="metadata">
+        </video>
     </div>
 </div>

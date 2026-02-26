@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="css/styles.css">
 
     <!-- Favicon and theme -->
-    <link rel="icon" href="images/alqaima-logo.png" type="image/png">
-    <link rel="apple-touch-icon" href="images/alqaima-logo.png">
+    <link rel="icon" href="assets/images/alqaima-logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/alqaima-logo.png">
     <meta name="theme-color" content="#f59e0b">
 
     <!-- Fonts & base styles -->
@@ -104,7 +104,7 @@
 
             <!-- Header & Search -->
             <div class="px-6 pt-8 md:pt-0 pb-6 bg-gradient-to-br from-amber-400 to-red-500">
-                <img src="images/alqaima-logo.png" :alt="translations.logoAlt[lang]"
+                <img src="assets/images/alqaima-logo.png" :alt="translations.logoAlt[lang]"
                     class="h-24 w-auto max-w-[190px] object-contain brightness-0 invert">
 
                 <h1 class="text-2xl font-bold text-white mb-1" x-text="translations.sidebarTitle[lang]"></h1>
@@ -113,17 +113,18 @@
 
                 <!-- Search -->
                 <div class="relative group mt-2">
+                    <label for="sidebar-search" class="sr-only" x-text="translations.searchPlaceholder[lang]"></label>
                     <span class="absolute inset-y-0 left-3 rtl:left-auto rtl:right-3
                                  flex items-center pointer-events-none
-                                 text-white/70 group-focus-within:text-white transition-colors">
+                                 text-white/70 group-focus-within:text-white transition-colors z-10">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </span>
-                    <input type="text" :title="translations.searchTitle[lang]"
+                    <input id="sidebar-search" type="text" :title="translations.searchTitle[lang]"
                         :placeholder="translations.searchPlaceholder[lang]" x-model.debounce.300ms="searchQuery"
-                        class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5
+                        class="relative w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5
                                   bg-white/20 border border-white/30 rounded-xl
                                   text-white text-sm placeholder:text-white/80
                                   shadow-inner backdrop-blur-md transition-all

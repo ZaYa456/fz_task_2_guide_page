@@ -2,19 +2,28 @@
     <h2 data-en="Upload Cover Photo" data-ar="تحميل صورة الغلاف">Upload Cover Photo</h2>
 
     <p data-en="The cover photo appears at the top of your public menu. Choose an appetizing image that showcases your restaurant or signature dishes. Recommended size: 1920x600 pixels."
-       data-ar="تظهر صورة الغلاف في أعلى قائمتك العامة. اختر صورة شهية تُبرز مطعمك أو أطباقك المميزة. الحجم الموصى به: 1920×600 بكسل.">
+        data-ar="تظهر صورة الغلاف في أعلى قائمتك العامة. اختر صورة شهية تُبرز مطعمك أو أطباقك المميزة. الحجم الموصى به: 1920×600 بكسل.">
         The cover photo appears at the top of your public menu. Choose an appetizing image that
         showcases your restaurant or signature dishes. Recommended size: 1920x600 pixels.
     </p>
 
     <div class="video-container">
-        <div class="video-placeholder">
-            <div class="video-placeholder-content">
-                <div class="video-placeholder-icon">▶</div>
-                <div class="video-placeholder-text"
-                     data-en="Upload Cover Photo Video"
-                     data-ar="فيديو تحميل صورة الغلاف">Upload Cover Photo Video</div>
+        <div class="video-loading">
+            <div class="video-spinner"></div>
+            <div class="video-loading-text" data-en="Loading video..." data-ar="جاري تحميل الفيديو...">Loading
+                video...</div>
+        </div>
+        <div class="video-error">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <div class="video-error-text" data-en="Video unavailable" data-ar="الفيديو غير متاح">Video unavailable
             </div>
         </div>
+        <video data-src="assets/videos/settings-cover.mp4" controls preload="metadata">
+        </video>
     </div>
 </div>

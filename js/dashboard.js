@@ -188,6 +188,7 @@ function dashboard() {
                 if (text !== null) el.textContent = text;
             });
             this.initFaqAccordion();
+            this.initVideos();
         },
 
         initFaqAccordion() {
@@ -217,7 +218,62 @@ function dashboard() {
             });
         },
 
+        initVideos() {
+            const lang = this.lang;
+
+            document.querySelectorAll('.video-container').forEach(container => {
+                const video = container.querySelector('video');
+                if (!video) return;
+
+                // Set src from data-src if not already set
+                const src = video.dataset.src;
+                if (!src) return;
+                if (!video.src) video.src = src;
+
+                // Avoid double initialization
+                if (video.dataset.videoInit) return;
+                video.dataset.videoInit = 'true';
+
+                const loading = container.querySelector('.video-loading');
+                const error = container.querySelector('.video-error');
+                const loadingText = container.querySelector('.video-loading-text');
+                const errorText = container.querySelector('.video-error-text');
+
+                // Translate loading/error text
+                if (loadingText) {
+                    const text = loadingText.getAttribute('data-' + lang);
+                    if (text) loadingText.textContent = text;
+                }
+
+                if (errorText) {
+                    const text = errorText.getAttribute('data-' + lang);
+                    if (text) errorText.textContent = text;
+                }
+
+                const showVideo = () => {
+                    if (loading) loading.style.display = 'none';
+                    video.style.display = 'block';
+                    if (error) error.style.display = 'none';
+                };
+
+                const showError = () => {
+                    if (loading) loading.style.display = 'none';
+                    if (error) error.style.display = 'flex';
+                    video.style.display = 'none';
+                };
+
+                video.addEventListener('loadeddata', showVideo);
+                video.addEventListener('error', showError);
+
+                // Handle already cached videos
+                if (video.readyState >= 2) {
+                    showVideo();
+                }
+            });
+        },
+
         async selectSection(id) {
+            this.cleanupVideos();
             this.currentSection = id;
             this.searchQuery = '';
             this.openCategoryFor(id);
@@ -259,6 +315,14 @@ function dashboard() {
                     contentEl.setAttribute('data-section', id);
                     contentEl.focus();
                 }
+            });
+        },
+
+        // Clean up video elements to stop playback and free resources when navigating away
+        cleanupVideos() {
+            document.querySelectorAll('.video-container video').forEach(video => {
+                video.pause();
+                video.currentTime = 0;
             });
         },
 
